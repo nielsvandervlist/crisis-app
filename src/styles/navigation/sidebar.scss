@@ -1,0 +1,29 @@
+.sidebar {
+    @apply
+    bg-white
+    shadow-gray-100
+    shadow-md;
+    padding: 30px 15px;
+    min-height: 100vh;
+    width: 250px;
+
+    &__logo, &__main {
+        margin-bottom: 30px;
+    }
+
+    nav {
+        ul{
+            li{
+                margin-bottom: 7px;
+                a{
+                    display: block;
+                    padding: 10px 15px;
+                    @apply text-gray-300;
+                    svg{
+                        margin-right: 15px;
+                    }
+                }
+            }
+        }
+    }
+}

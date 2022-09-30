@@ -1,0 +1,19 @@
+.btn{
+    border-radius: 6px;
+    background: #696CFF;
+    padding: 10px 20px;
+    color: white;
+
+    &--primary {
+        @apply bg-primary;
+        box-shadow: 0 2px 4px 0 #696CFF;
+    }
+
+    &--success {
+        @apply bg-success;
+    }
+
+    &--error {
+        @apply bg-danger;
+    }
+}
