@@ -1,0 +1,32 @@
+.chat {
+    min-height: calc(100vh - 155px);
+    &__wrapper {
+        flex: 1 1 auto;
+        height: 100%;
+    }
+
+    &__header {
+        flex: 0 1 auto;
+    }
+
+    &__channels {
+        border-right: 1px solid #696CFF;
+    }
+
+    &__active {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        flex: 1 1 auto;
+    }
+
+    &__messages {
+        background:#fbfbfb;
+        flex: 1 1 auto;
+        @apply p-8
+    }
+
+    &__form {
+
+    }
+}

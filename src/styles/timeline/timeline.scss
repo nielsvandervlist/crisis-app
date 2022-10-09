@@ -35,6 +35,11 @@
         @apply border-gray-100;
     }
 
+    &__edit-wrapper {
+        background: red;
+        position: relative;
+    }
+
     &__line {
         position: relative;
         border-radius: 7px;
@@ -42,10 +47,6 @@
         width: 100%;
         margin-bottom: 20px;
         @apply bg-gray-100;
-
-        .timeline-posts-post {
-
-        }
 
         .timeline-posts-add {
 
@@ -77,6 +78,57 @@
                 &:last-child {
                     margin-right: 0px;
                 }
+            }
+        }
+    }
+
+    .timeline-posts-post {
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        position: absolute;
+        top: -70px;
+        left: 0;
+
+
+        &:before {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            font-family: 'Font Awesome 6 Free';
+            transform: translate(-50%, -50%);
+            font-weight: 900;
+            font-size: 20px;
+        }
+
+        &:after {
+            content: '';
+            width: 1px;
+            position: absolute;
+            bottom: -20px;
+            top: 40px;
+            left: 20px;
+        }
+
+        &__edit {
+            background: rgba(3,195,236,0.16);
+            &:before {
+                content: '\f044';
+                color: #03C3EC;
+            }
+            &:after {
+                background: #03C3EC;
+            }
+        }
+
+        &__add {
+            background: rgba(113,221,55,0.16);
+            &:before {
+                content: '\2b';
+                color: #71DD37;
+            }
+            &:after {
+                background: #71DD37;
             }
         }
     }

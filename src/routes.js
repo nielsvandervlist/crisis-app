@@ -27,8 +27,22 @@ const backend = Router.api('backend', `${process.env.NEXT_PUBLIC_BACKEND_URL}`)
     .store('timelines', '/api/timelines', {form_data: true})
     .delete('timelines', '/api/timelines/{id}')
 
+    .index('participants', '/api/participants')
+    .show('participants', '/api/participants/{id}')
+    .store('participants', '/api/participants', {form_data: true})
+    .delete('participants', '/api/participants/{id}')
+
     .index('crises', '/api/crises')
     .show('crises', '/api/crises/{id}')
     .store('crises', '/api/crises', {form_data: true})
     .delete('crises', '/api/crises/{id}')
+
+    .index('timeline_posts', '/api/timeline_posts')
+    .show('timeline_posts', '/api/timeline_posts/{id}')
+    .store('timeline_posts', '/api/timeline_posts', {form_data: true})
+    .delete('timeline_posts', '/api/timeline_posts/{id}')
+
+    .store('messages', '/api/messages')
+
+
 

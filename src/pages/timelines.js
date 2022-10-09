@@ -1,8 +1,24 @@
 import AppLayout from '@/components/Layouts/AppLayout'
 import Head from 'next/head'
 import {useAuth} from '@/hooks/auth'
+import List from '@/components/Lists/List'
+import {useEffect, useState} from 'react'
+import {Fetcher} from 'ra-fetch'
 
 const Timelines = () => {
+
+    const {user} = useAuth({middleware: 'auth'})
+    const [timelines, setTimelines] = useState()
+
+    useEffect(() => {
+        if (user?.id) {
+            Fetcher.api('backend')
+                .index('timelines', {
+                    user_id: user?.id,
+                })
+                .then(response => setTimelines(response))
+        }
+    }, [user?.id])
 
     return (
         <AppLayout
@@ -15,15 +31,7 @@ const Timelines = () => {
                 <title>Laravel - Overview</title>
             </Head>
 
-            <div className="py-12">
-                <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                    <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                        <div className="p-6 bg-white border-b border-gray-200">
-                            This is the overview
-                        </div>
-                    </div>
-                </div>
-            </div>
+            {timelines && <List items={timelines} setItems={setTimelines} type={'timelines'}/>}
         </AppLayout>
     )
 }

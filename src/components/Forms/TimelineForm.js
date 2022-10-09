@@ -2,13 +2,9 @@ import {useState} from 'react'
 import {Fetcher, useApi, useIndex} from 'ra-fetch'
 import {useAuth} from '@/hooks/auth'
 
-function TimelineForm() {
+function TimelineForm({startTime, endTime, setStartTime, setEndTime, title, setTitle}) {
 
     const {user} = useAuth({middleware: 'auth'})
-
-    const [title, setTitle] = useState('')
-    const [startTime, setStartTime] = useState('')
-    const [endTime, setEndTime] = useState('')
     const [company, setCompany] = useState()
     const [response, setResponse] = useState()
     const [errors, setErrors] = useState()

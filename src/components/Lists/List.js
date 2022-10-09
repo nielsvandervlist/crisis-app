@@ -20,7 +20,7 @@ export default function List({items, setItems, type}) {
         setItems({loading: false, data: filtered})
     }
 
-    if (items.loading) {
+    if (!items.data.length || items.loading) {
         return <></>
     }
 
