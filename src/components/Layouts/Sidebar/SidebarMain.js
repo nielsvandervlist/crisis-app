@@ -35,6 +35,11 @@ function SidebarMain(){
                         <a><FontAwesomeIcon icon="clock"/>Timelines</a>
                     </Link>
                 </li>
+                <li>
+                    <Link href={'/rapports'}>
+                        <a><FontAwesomeIcon icon="clock"/>Rapports</a>
+                    </Link>
+                </li>
             </ul>
         </nav>
     </div>

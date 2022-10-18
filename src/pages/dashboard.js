@@ -3,9 +3,8 @@ import Head from 'next/head'
 import List from '@/components/Lists/List'
 import {useAuth} from '@/hooks/auth'
 import {Fetcher, useIndex} from 'ra-fetch'
-import axios from '@/lib/axios'
 import {useEffect, useState} from 'react'
-import Sidebar from '@/components/Layouts/Sidebar/Sidebar'
+import Twitter from '@/components/PostTypes/Twitter'
 
 const Dashboard = () => {
 
@@ -40,6 +39,9 @@ const Dashboard = () => {
             <Head>
                 <title>Laravel - Dashboard</title>
             </Head>
+
+            <Twitter/>
+
             {crises && <List items={crises} setItems={setCrises} type={'crises'}/>}
             {posts && <List items={posts} setItems={setPosts} type={'posts'}/>}
 

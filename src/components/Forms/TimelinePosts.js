@@ -51,13 +51,13 @@ function TimelinePosts({timelinePosts, posts, setPosts, startTime, endTime, titl
             <button className={'btn btn--primary'}>Save timeline</button>
         </div>
         <Modal title={'Add posts to timeline'} open={open} setOpen={setOpen}>
-            <div className={'between mb-4'}>
-                <i>Post time must be between
-                    <b>{startTime.split('T')[1]}</b>
-                    and <b>{endTime.split('T')[1]}</b>
-                    of <b>{startTime.split('T')[0]}</b>
-                </i>
-            </div>
+            {/*<div className={'between mb-4'}>*/}
+            {/*    <i>Post time must be between*/}
+            {/*        <b>{startTime.split('T')[1]}</b>*/}
+            {/*        and <b>{endTime.split('T')[1]}</b>*/}
+            {/*        of <b>{startTime.split('T')[0]}</b>*/}
+            {/*    </i>*/}
+            {/*</div>*/}
             <TimelinePostForm
                 startTime={startTime}
                 endTime={endTime}

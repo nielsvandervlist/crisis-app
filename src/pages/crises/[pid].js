@@ -4,24 +4,23 @@ import {useEffect, useState} from 'react'
 import {useAuth} from '@/hooks/auth'
 import AppLayout from '@/components/Layouts/AppLayout'
 import Head from 'next/head'
-import List from '@/components/Lists/List'
-import PostForm from '@/components/Forms/PostForm'
+import CrisisForm from '@/components/Forms/CrisisForm'
 
-const Post = () => {
+const Crisis = () => {
 
     const router = useRouter()
     const { pid } = router.query
-    const [post, setPost] = useState()
+    const [crisis, setCrisis] = useState()
 
     const { user } = useAuth({ middleware: 'auth' })
 
     useEffect(() => {
         if(user?.id)
             Fetcher.api('backend')
-                .show('posts', {
+                .show('crisiss', {
                     id: pid,
                 })
-                .then(response => setPost(response))
+                .then(response => setCrisis(response))
 
     }, [user?.id])
 
@@ -34,17 +33,17 @@ const Post = () => {
             }>
 
             <Head>
-                <title>Edit Post</title>
+                <title>Edit Crisis</title>
             </Head>
 
             <div className={'card col-span-12'}>
-                {post && <h1>Edit {post.data.title}</h1>}
+                {crisis && <h1>Edit {crisis.data.title}</h1>}
             </div>
 
-            {post && <PostForm requestType={'update'} id={pid} post={post}/>}
+            {crisis && <CrisisForm requestType={'update'} id={pid} crisis={crisis}/>}
 
         </AppLayout>
     )
 }
 
-export default Post
+export default Crisis

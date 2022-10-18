@@ -1,23 +1,25 @@
-import {useEffect, useState} from 'react'
-import {Fetcher, useApi, useIndex} from 'ra-fetch'
 import {useAuth} from '@/hooks/auth'
+import {useEffect, useState} from 'react'
+import {Fetcher} from 'ra-fetch'
 
-function PostForm({requestType, id, post}) {
+function CrisisForm({requestType, crisis, id}) {
 
     const {user} = useAuth({middleware: 'auth'})
 
-    const [title, setTitle] = useState(post ? post.data.title : '')
-    const [description, setDescription] = useState(post ? post.data.description : '')
-    const [type, setType] = useState(post ? post.data.post_type_id : '')
+    const [title, setTitle] = useState(crisis ? crisis.data.title : '')
+    const [description, setDescription] = useState(crisis ? crisis.data.description : '')
+    const [company, setCompany] = useState(crisis ? crisis.data.company_id : '')
+    const [status, setStatus] = useState(crisis ? crisis.data.status: false)
     const [response, setResponse] = useState()
     const [errors, setErrors] = useState()
-    const [postTypes, setPostTypes] = useState({data: []})
+    const [companies, setCompanies] = useState({data: []})
 
     useEffect(() => {
-        Fetcher.api('backend').index('post_types')
+        Fetcher.api('backend').index('companies')
             .then((res) => {
-                setPostTypes(res)
+                setCompanies(res)
             })
+            .catch(err => setErrors(err))
     }, [])
 
     if (!user) {
@@ -27,8 +29,9 @@ function PostForm({requestType, id, post}) {
     const params = {
         title: title,
         description: description,
-        post_type_id: type,
+        company_id: company,
         user_id: user.id,
+        status: status
     }
 
     if (id) {
@@ -39,13 +42,13 @@ function PostForm({requestType, id, post}) {
         e.preventDefault()
 
         if (requestType === 'store') {
-            Fetcher.api('backend').store('posts', params)
+            Fetcher.api('backend').store('crises', params)
                 .then(response => setResponse(response))
                 .catch(errors => setErrors(errors))
         }
 
         if (requestType === 'update') {
-            Fetcher.api('backend').update('posts', params)
+            Fetcher.api('backend').update('crises', params)
                 .then(response => setResponse(response))
                 .catch(errors => setErrors(errors))
         }
@@ -75,16 +78,16 @@ function PostForm({requestType, id, post}) {
                     name={'description'}
                 />
             </div>
-            {postTypes.data.length > 0 && <div className={'form__block'}>
-                <label>Type of post</label>
+            {companies.data.length > 0 && <div className={'form__block'}>
+                <label>Type of crisis</label>
                 <select
-                    value={type}
-                    onChange={event => setType(event.target.value)}
+                    value={company}
+                    onChange={event => setCompany(event.target.value)}
                 >
                     <option>Select a option</option>
                     {
-                        postTypes.data.map((type, index) => {
-                            return <option key={index} value={type.id}>{type.name}</option>
+                        companies.data.map((company, index) => {
+                            return <option key={index} value={company.id}>{company.name}</option>
                         })
                     }
                 </select>
@@ -98,4 +101,4 @@ function PostForm({requestType, id, post}) {
     </form>
 }
 
-export default PostForm
+export default CrisisForm

@@ -1,9 +1,13 @@
-import Head from 'next/head'
-import List from '@/components/Lists/List'
 import AppLayout from '@/components/Layouts/AppLayout'
-import PostForm from '@/components/Forms/PostForm'
+import Head from 'next/head'
+import {useAuth} from '@/hooks/auth'
+import {useEffect, useState} from 'react'
+import {Fetcher} from 'ra-fetch'
+import List from '@/components/Lists/List'
+import CrisisForm from '@/components/Forms/CrisisForm'
 
-function Create(){
+const Create = () => {
+
     return (
         <AppLayout
             header={
@@ -16,11 +20,7 @@ function Create(){
                 <title>Laravel - Dashboard</title>
             </Head>
 
-            <div className={'card col-span-12'}>
-                <h1>Create Post</h1>
-            </div>
-
-            <PostForm requestType={'post'}/>
+            <CrisisForm requestType={'post'}/>
 
         </AppLayout>
     )
