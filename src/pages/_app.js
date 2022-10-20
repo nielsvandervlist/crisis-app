@@ -16,9 +16,20 @@ import {
     faTrashCan,
     faEllipsisVertical,
     faCircleXmark,
+    faShare,
+    faThumbsUp,
+    faShareAlt,
+    faUsers,
+    faHeart,
 } from '@fortawesome/free-solid-svg-icons'
 
-library.add(faUser,
+library.add(
+    faHeart,
+    faUser,
+    faUsers,
+    faShareAlt,
+    faThumbsUp,
+    faShare,
     faFire,
     faClock,
     faBuilding,

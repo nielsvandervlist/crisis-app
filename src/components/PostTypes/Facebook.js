@@ -4,35 +4,31 @@ function Facebook(){
     return <div className={'facebook'}>
         <div className={'facebook__header'}>
             <div className={'flex'}>
-                <img className={'rounded-full w-24 h-24'} src={'/'} alt={''}/>
+                <img className={'rounded-full w-8 h-8'} src={'/images/Portrait_Placeholder.png'} alt={''}/>
                 <div className={'facebook__header__info'}>
-                    <span>Name of poster</span>
-                    <span>5 mins . icon</span>
+                    <span>Hans teeuwen</span>
+                    <span>5 mins . <FontAwesomeIcon icon="users"/></span>
                 </div>
             </div>
-            <FontAwesomeIcon icon="down-to-dotted-line"/>
+            <FontAwesomeIcon icon="ellipsis-vertical"/>
+            <h3>Ttitle</h3>
         </div>
-        <h3>Ttitle</h3>
-        <img src={'/'} alt={''}/>
+        <img src={'/images/placeholder.png'} className={'w-full'} alt={''}/>
         <div className={'facebook__body'}>
             <div className={'facebook__likes'}>
-                <span>icon</span>
+                <FontAwesomeIcon icon="heart"/>
                 <span> 15 people</span>
             </div>
             <div className={'facebook__comments'}>
-                <div>Like</div>
-                <div>Comment</div>
-                <div>Share</div>
+                <div> <FontAwesomeIcon icon="thumbs-up"/>Like</div>
+                <div> <FontAwesomeIcon icon="comment"/>Comment</div>
+                <div><FontAwesomeIcon icon="share-alt"/>Share</div>
             </div>
             <div className={'facebook__add-comments'}>
-                <img className={'rounded-full w-24 h-24'} src={'/'} alt={''}/>
+                <img src={'/images/Portrait_Placeholder.png'} className={'w-8 h-8 rounded-full'} alt={''}/>
                 <div className={'facebook__write flex'}>
                     <div>Comment</div>
-                    <div className={'options flex'}>
-                        <span>emoiji</span>
-                        <span>camera</span>
-                        <span>gif</span>
-                        <span>img</span>
+                    <div className={'write-options flex'}>
                     </div>
                 </div>
             </div>
