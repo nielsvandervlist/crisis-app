@@ -1,7 +1,7 @@
 import {useEffect, useRef, useState} from 'react'
 import EditBox from '@/components/Timeline/EditBox'
 
-function Line({setOpen, startTime, endTime, timelinePosts, width}) {
+function Line({setOpen, open, startTime, endTime, timelinePosts, setTimelinePosts, timeline, edit, setEdit}) {
 
     const [line, setLine] = useState({
         blocks: [],
@@ -19,11 +19,14 @@ function Line({setOpen, startTime, endTime, timelinePosts, width}) {
         let timeBlock = []
         let placement = []
 
-        timelinePosts.data.forEach((post, index) => {
+        timelinePosts.data.forEach((post) => {
 
             const postDate = new Date(post.time)
-            const minute = (Math.abs(endDate - postDate) / 1000) / 60
-            const postMinute = (width / 100) * minute
+            const minute = (Math.abs(startDate - postDate) / 1000) / minutes
+
+            const width = document.querySelector('#line').offsetWidth
+
+            const postMinute = (width / minutes) * minute
 
             placement.push({
                 post_id: post.id,
@@ -41,20 +44,23 @@ function Line({setOpen, startTime, endTime, timelinePosts, width}) {
             minutes: minutes,
             posts: placement,
         })
-    }, [startTime, endTime])
-
+    }, [startTime, endTime, timelinePosts])
 
     return <div className={'timeline__line'}>
         <div className={'timeline-posts__wrapper'}>
-            <div className={'timeline-posts__edit-wrapper'}>
+            <div className={'timeline-posts__edit-wrapper relative'}>
                 {
                     line.posts.map((post, index) => {
-                        return <EditBox
-                            index={index}
-                            id={post.id}
-                            post={post}
-
-                        />
+                        return <div className={'absolute'} key={index} style={{left: post.pixels}}>
+                            <EditBox
+                                setOpen={setOpen}
+                                open={open}
+                                index={index}
+                                post={post}
+                                edit={edit}
+                                setEdit={setEdit}
+                            />
+                        </div>
                     })
                 }
             </div>

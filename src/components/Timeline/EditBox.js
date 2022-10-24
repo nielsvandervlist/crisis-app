@@ -1,21 +1,19 @@
-import {useState} from 'react'
+import {useEffect, useState} from 'react'
 import Modal from '@/components/Modal/Modal'
 import {useApi, useShow} from 'ra-fetch'
+import TimelinePostForm from '@/components/Forms/TimelinePostForm'
 
-function EditBox({index, post, id}) {
+function EditBox({post, setOpen, open, setEdit}) {
 
-    const [edit, setEdit] = useState(false)
+    useEffect(() => {
+        setEdit(post.post_id)
+    }, [])
 
     return <>
         <div
-            key={index}
-            style={{left: post.pixels}}
             className={'timeline-posts-post timeline-posts-post__edit cursor-pointer'}
-            onClick={() => setEdit(!edit)}
+            onClick={() => setOpen(!open)}
         />
-        <Modal>
-
-        </Modal>
     </>
 }
 

@@ -13,10 +13,10 @@ function TimelinePosts({startTime, endTime, title, timeline}) {
 
     const {user} = useAuth({middleware: 'auth'})
     const [open, setOpen] = useState(false)
-    const [width, setWidth] = useState()
     const [posts, setPosts] = useState('')
     const [timelinePosts, setTimelinePosts] = useState([])
     const [dateString, setDateString] = useState()
+    const [edit, setEdit] = useState()
 
     useEffect(() => {
         if (user?.id) {
@@ -25,7 +25,7 @@ function TimelinePosts({startTime, endTime, title, timeline}) {
             }).then(res => setPosts(res))
 
             Fetcher.api('backend').index('timeline_posts', {
-                timeline_id: timeline.id,
+                timeline_id: timeline.data.id,
             }).then(res => setTimelinePosts(res))
                 .catch(err => console.log(err))
         }
@@ -38,7 +38,6 @@ function TimelinePosts({startTime, endTime, title, timeline}) {
 
         setDateString(startTime.toLocaleString('default', {day: 'numeric', month: 'long'}).split(' '))
 
-        // setWidth(document.querySelector('#line').offsetWidth)
     }, [startTime])
 
     if (timelinePosts.loading || timelinePosts.length < 1) {
@@ -47,19 +46,35 @@ function TimelinePosts({startTime, endTime, title, timeline}) {
 
     return <div className={'card col-span-12 timeline-posts'}>
         <TimelinePostsHeader title={title}/>
+
         <div id={'line'} className={'w-full'}/>
-        <Line timelinePosts={timelinePosts} setOpen={setOpen} startTime={startTime} endTime={endTime} width={width}/>
+
+        <Line
+            setTimelinePosts={setTimelinePosts}
+            timeline={timeline}
+            timelinePosts={timelinePosts}
+            setOpen={setOpen}
+            startTime={startTime}
+            endTime={endTime}
+            open={open}
+            edit={edit}
+            setEdit={setEdit}
+        />
+
         <TimelinePostsFooter company_id={timeline.data.company_id}/>
+
         <Modal title={'Add posts to timeline'} open={open} setOpen={setOpen}>
             <TimelinePostForm
-                timelinePost={timelinePosts}
+                timelinePosts={timelinePosts}
                 setTimelinePosts={setTimelinePosts}
                 startTime={startTime}
                 endTime={endTime}
                 posts={posts}
                 user={user}
-                timelineId={1}
+                timelineId={timeline.data.id}
                 setPosts={setPosts}
+                setOpen={setOpen}
+                edit={edit}
             />
         </Modal>
     </div>

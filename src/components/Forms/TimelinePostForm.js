@@ -2,7 +2,7 @@ import {useEffect, useState} from 'react'
 import {Fetcher, useApi, useIndex} from 'ra-fetch'
 import {useAuth} from '@/hooks/auth'
 
-function TimelinePostForm({user, timelineId, posts, setPosts, startTime, endTime, timelinePost, setTimelinePosts}) {
+function TimelinePostForm({timelineId, posts, startTime, endTime, timelinePosts, setTimelinePosts, setOpen, edit}) {
 
     const [time, setTime] = useState('')
     const [postId, setPostId] = useState('')
@@ -10,37 +10,53 @@ function TimelinePostForm({user, timelineId, posts, setPosts, startTime, endTime
     const [errors, setErrors] = useState()
 
     //Update posts on timeline
-    function addPost(){
-        //TODO Finish this
-        posts.data.push({
-            id: postId,
-        })
+    function addTimelinePost(response){
+        let newTimelinePosts = timelinePosts.data.clone()
+        newTimelinePosts.save(response)
+        setTimelinePosts({data: newTimelinePosts})
+        setOpen(false)
+    }
 
-        setPosts({
-            loading: false,
-            data: {...posts.data, title: 'yes'}
-        })
+    useEffect(() => {
+        if(edit) {
+            const filter = timelinePosts.data.filter((item) => item.id === edit)
+            setTime(filter[0].time)
+            setPostId(filter[0].post_id)
+        }
+    }, [edit])
+
+    let params = {
+        time: time,
+        post_id: postId,
+        timeline_id: timelineId
+    }
+
+    if(edit){
+        params.id = edit
     }
 
     function submit(e) {
         e.preventDefault()
-        Fetcher.api('backend').store('timeline_posts', {
-            time: time,
-            post_id: postId,
-            timeline_id: timelineId,
-        })
-            .then(response => setTimelinePosts(response))
-            .catch(errors => setErrors(errors))
+
+        if(!edit) {
+            Fetcher.api('backend').store('timeline_posts', params)
+                .then(response => addTimelinePost(response.data))
+                .catch(errors => setErrors(errors))
+        } else {
+            Fetcher.api('backend').update('timeline_posts', params)
+                .then(response => addTimelinePost(response.data))
+                .catch(errors => setErrors(errors))
+        }
     }
 
     return <form className={'col-span-12 form'}>
-        {/*<div className={'between mb-4'}>*/}
-        {/*    <i>Post time must be between*/}
-        {/*        <b>{startTime.split('T')[1]}</b>*/}
-        {/*        and <b>{endTime.split('T')[1]}</b>*/}
-        {/*        of <b>{startTime.split('T')[0]}</b>*/}
-        {/*    </i>*/}
-        {/*</div>*/}
+        <div className={'between mb-4'}>
+            <i>Post time must be between
+                <b>{startTime.split('T')[1]}</b>
+                and <b>{endTime.split('T')[1]}</b>
+                of <b>{startTime.split('T')[0]}</b>
+            </i>
+        </div>
         <fieldset>
             <div className={'form__block'}>
                 <label>Time</label>
@@ -70,8 +86,8 @@ function TimelinePostForm({user, timelineId, posts, setPosts, startTime, endTime
         </fieldset>
         <div className={'flex items-center'}>
             {response && <div className={'btn btn--success'}>Timeline created</div>}
-            {errors && <div className={'btn btn--error'}>{errors.errors[0]}</div>}
-            <button className={'btn btn--primary ml-auto mt-4'} onClick={(e) => submit(e)}>Submit</button>
+            {/*{errors && <div className={'btn btn--error'}>{errors.errors[0]}</div>}*/}
+            <button className={'btn btn--primary ml-auto mt-4'} onClick={submit}>Submit</button>
         </div>
     </form>
 }
