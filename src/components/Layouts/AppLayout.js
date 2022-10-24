@@ -11,7 +11,7 @@ const AppLayout = ({ header, children }) => {
                 <Sidebar/>
             </div>
             <div className={'w-full'}>
-                <Navigation user={user} />
+                <Navigation header={header} user={user} />
                 <main className={'grid grid-cols-12 gap-4 p-6'}>{children}</main>
             </div>
         </div>

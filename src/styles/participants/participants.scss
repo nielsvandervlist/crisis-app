@@ -1,0 +1,7 @@
+.participants {
+    flex-direction: row-reverse;
+    &__block {
+        border: 3px solid white;
+        margin-right: -7px
+    }
+}

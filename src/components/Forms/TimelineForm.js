@@ -1,13 +1,15 @@
-import {useState} from 'react'
+import {useEffect, useState} from 'react'
 import {Fetcher, useApi, useIndex} from 'ra-fetch'
 import {useAuth} from '@/hooks/auth'
 
-function TimelineForm({startTime, endTime, setStartTime, setEndTime, title, setTitle}) {
+function TimelineForm({startTime, endTime, setStartTime, setEndTime, title, setTitle, setTimeline}) {
 
     const {user} = useAuth({middleware: 'auth'})
     const [company, setCompany] = useState()
     const [response, setResponse] = useState()
     const [errors, setErrors] = useState()
+    const [crises, setCrises] = useState()
+    const [crisis, setCrisis] = useState()
 
     const companies = useApi('backend').index('companies')
 
@@ -18,11 +20,19 @@ function TimelineForm({startTime, endTime, setStartTime, setEndTime, title, setT
             start_time: startTime,
             end_time: endTime,
             company_id: company,
-            user_id: user.id
+            crisis_id: crisis,
+            user_id: user.id,
         })
-            .then(response => setResponse(response))
+            .then(response => setTimeline(response))
             .catch(errors => setErrors(errors))
     }
+
+    useEffect(() => {
+        if(user?.id){
+            Fetcher.api('backend').index('crises').then(res => setCrises(res)).catch(err => console.log(err))
+        }
+
+    }, [user?.id])
 
     return <form className={'card col-span-12 form'}>
         <fieldset>
@@ -71,6 +81,23 @@ function TimelineForm({startTime, endTime, setStartTime, setEndTime, title, setT
                     }
                 </select>
             </div>
+            {
+                crises && !crises.loading && crises.data.length > 0 &&
+                <div className={'form__block'}>
+                    <label>Crisis</label>
+                    <select
+                        value={crisis}
+                        onChange={event => setCrisis(event.target.value)}
+                    >
+                        <option>Select a option</option>
+                        {
+                            crises.data.map((crisis, index) => {
+                                return <option key={index} value={crisis.id}>{crisis.title}</option>
+                            })
+                        }
+                    </select>
+                </div>
+            }
         </fieldset>
         <div className={'flex items-center'}>
             {response && <div className={'btn btn--success'}>Timeline created</div>}

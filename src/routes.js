@@ -41,6 +41,7 @@ const backend = Router.api('backend', `${process.env.NEXT_PUBLIC_BACKEND_URL}`)
     .index('crises', '/api/crises')
     .show('crises', '/api/crises/{id}')
     .store('crises', '/api/crises', {form_data: true})
+    .update('crises', '/api/crises/{id}', {form_data: true})
     .delete('crises', '/api/crises/{id}')
 
     .index('timeline_posts', '/api/timeline_posts')

@@ -2,7 +2,7 @@ import {useEffect, useState} from 'react'
 import {Fetcher, useApi, useIndex} from 'ra-fetch'
 import {useAuth} from '@/hooks/auth'
 
-function TimelinePostForm({user, timelineId, posts, setPosts, startTime, endTime}) {
+function TimelinePostForm({user, timelineId, posts, setPosts, startTime, endTime, timelinePost, setTimelinePosts}) {
 
     const [time, setTime] = useState('')
     const [postId, setPostId] = useState('')
@@ -29,11 +29,18 @@ function TimelinePostForm({user, timelineId, posts, setPosts, startTime, endTime
             post_id: postId,
             timeline_id: timelineId,
         })
-            .then(response => setResponse(response))
+            .then(response => setTimelinePosts(response))
             .catch(errors => setErrors(errors))
     }
 
     return <form className={'col-span-12 form'}>
+        {/*<div className={'between mb-4'}>*/}
+        {/*    <i>Post time must be between*/}
+        {/*        <b>{startTime.split('T')[1]}</b>*/}
+        {/*        and <b>{endTime.split('T')[1]}</b>*/}
+        {/*        of <b>{startTime.split('T')[0]}</b>*/}
+        {/*    </i>*/}
+        {/*</div>*/}
         <fieldset>
             <div className={'form__block'}>
                 <label>Time</label>
