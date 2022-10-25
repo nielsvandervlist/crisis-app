@@ -8,7 +8,7 @@ const AppLayout = ({ header, children }) => {
     return (
         <div className="min-h-screen flex">
             <div className={'col-span-3'}>
-                <Sidebar/>
+                <Sidebar user={user}/>
             </div>
             <div className={'w-full'}>
                 <Navigation header={header} user={user} />
