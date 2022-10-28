@@ -4,6 +4,7 @@ import {useAuth} from '@/hooks/auth'
 import {useEffect, useState} from 'react'
 import {Fetcher} from 'ra-fetch'
 import List from '@/components/Lists/List'
+import Link from 'next/link'
 
 const Participants = () => {
 
@@ -30,6 +31,10 @@ const Participants = () => {
             <Head>
                 <title>Laravel - Overview</title>
             </Head>
+
+            <div className={'flex w-full col-span-12 mb-2'}>
+                <button className={'btn btn--primary'}><Link href={`participants/create`}><a>Create participant</a></Link></button>
+            </div>
 
             {participants && <List items={participants} setItems={setParticipants} type={'participants'}/>}
         </AppLayout>

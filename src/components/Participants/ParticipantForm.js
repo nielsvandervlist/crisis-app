@@ -7,10 +7,19 @@ function ParticipantForm({requestType, id, participant}){
 
     const [name, setName] = useState(participant ? participant.data.name : '')
     const [email, setEmail] = useState(participant ? participant.data.email : '')
+    const [companies, setCompanies] = useState()
+    const [companyId, setCompanyId] = useState()
     const [response, setResponse] = useState()
     const [errors, setErrors] = useState()
 
-    if (!user) {
+    useEffect(() => {
+        Fetcher.api('backend').index('companies')
+            .then((res) => {
+                setCompanies(res)
+            })
+    }, [])
+
+    if (!user || !companies) {
         return <></>
     }
 
@@ -18,8 +27,7 @@ function ParticipantForm({requestType, id, participant}){
         name: name,
         email: email,
         user_id: user.id,
-        participant_role_id: 2,
-        company_id: 2,
+        company_id: companyId,
     }
 
     if (id) {
@@ -66,6 +74,20 @@ function ParticipantForm({requestType, id, participant}){
                     name={'email'}
                 />
             </div>
+            {!companies.loading && <div className={'form__block'}>
+                <label>Post</label>
+                <select
+                    value={companyId}
+                    onChange={event => setCompanyId(event.target.value)}
+                >
+                    <option>Select a option</option>
+                    {
+                        companies.data.map((company, index) => {
+                            return <option key={index} value={company.id}>{company.name}</option>
+                        })
+                    }
+                </select>
+            </div>}
         </fieldset>
         <div className={'flex items-center'}>
             {response && <div className={'btn btn--success'}>Post created</div>}

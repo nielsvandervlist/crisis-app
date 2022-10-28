@@ -11,10 +11,9 @@ export default function List({items, setItems, type}) {
             .catch(errors => console.log(errors))
     }
 
-    function removeItem(id)
-    {
+    function removeItem(id) {
         const filtered = items.data.filter(item => {
-            return item.id !== id;
+            return item.id !== id
         })
 
         setItems({loading: false, data: filtered})
@@ -28,10 +27,6 @@ export default function List({items, setItems, type}) {
     let headings = Object.keys(firstItem)
 
     return <div className={'table-overview col-span-12 p-8 bg-white'}>
-        <div className={'table-overview__heading flex align-center mb-2'}>
-            <h2>{type}</h2>
-            <button className={'ml-auto btn btn--primary'}><Link href={`${type}/create`}><a>Create {type}</a></Link></button>
-        </div>
         <table className={'w-full'}>
             <thead>
             <tr>
@@ -52,10 +47,10 @@ export default function List({items, setItems, type}) {
                                 return <td className={'p-4'} key={index}>{value}</td>
                             })
                         }
-                        <td className={'p-4'}><Link href={`/posts/${item.id}`}><a><FontAwesomeIcon
+                        <td className={'p-4'}><Link href={`/posts/${item.id}`}><a className={'btn btn--primary btn--label btn--icon'}><FontAwesomeIcon
                             icon="pen-to-square"/></a></Link></td>
                         <td className={'p-4 cursor-pointer'} onClick={() => submitDelete(item.id)}>
-                            <FontAwesomeIcon icon="trash-can"/>
+                            <div className={'btn btn--primary btn--label btn--icon'}><FontAwesomeIcon icon="trash-can"/></div>
                         </td>
                     </tr>
                 })

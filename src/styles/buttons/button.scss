@@ -3,17 +3,34 @@
     background: #696CFF;
     padding: 10px 20px;
     color: white;
+    font-weight: 800;
+    text-transform: uppercase;
 
     &--primary {
         @apply bg-primary;
-        box-shadow: 0 2px 4px 0 #696CFF;
+        box-shadow: 0 1px 3px 0 #696cff;
     }
 
     &--success {
         @apply bg-success;
+        box-shadow: 0 1px 3px 0 #528d32;
     }
 
     &--error {
         @apply bg-danger;
+    }
+
+    &--label {
+        padding: 5px 10px;
+        font-size: 11px;
+        font-weight: 800;
+        text-transform: uppercase;
+    }
+
+    &--icon {
+        font-size: 14px;
+        min-height: 30px;
+        min-width: 30px;
+        display: block;
     }
 }

@@ -5,7 +5,7 @@ function SidebarMain({user}){
     return <div className={'sidebar__main'}>
         <nav>
             {
-                user.role[0] === 'admin' || user.role[0] === 'editor' &&
+                (user?.role[0] === 'admin' || user?.role[0] === 'editor') &&
                 <ul>
                     <li>
                         <Link href={'/dashboard'}>

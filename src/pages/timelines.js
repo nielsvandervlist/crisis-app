@@ -4,6 +4,7 @@ import {useAuth} from '@/hooks/auth'
 import List from '@/components/Lists/List'
 import {useEffect, useState} from 'react'
 import {Fetcher} from 'ra-fetch'
+import Link from 'next/link'
 
 const Timelines = () => {
 
@@ -30,6 +31,10 @@ const Timelines = () => {
             <Head>
                 <title>Laravel - Overview</title>
             </Head>
+
+            <div className={'flex w-full col-span-12 mb-2'}>
+                <button className={'btn btn--primary'}><Link href={`timelines/create`}><a>Create timeline</a></Link></button>
+            </div>
 
             {timelines && <List items={timelines} setItems={setTimelines} type={'timelines'}/>}
         </AppLayout>
