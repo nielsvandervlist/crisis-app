@@ -30,6 +30,7 @@ function OnlineCrisis({crisis}) {
         Fetcher.api('backend').update('crises', {
             id: crisis.id,
             status: 0,
+            company: true,
         })
             .then(response => console.log(response))
             .catch(errors => console.log(errors))

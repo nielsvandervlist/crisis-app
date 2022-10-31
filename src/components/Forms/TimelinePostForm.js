@@ -2,7 +2,7 @@ import {useEffect, useState} from 'react'
 import {Fetcher, useApi, useIndex} from 'ra-fetch'
 import {useAuth} from '@/hooks/auth'
 
-function TimelinePostForm({timelineId, posts, startTime, endTime, timelinePosts, setTimelinePosts, setOpen, edit}) {
+function TimelinePostForm({timelineId, posts, timelinePosts, setTimelinePosts, setOpen, edit}) {
 
     const [time, setTime] = useState('')
     const [postId, setPostId] = useState('')
@@ -10,15 +10,19 @@ function TimelinePostForm({timelineId, posts, startTime, endTime, timelinePosts,
     const [errors, setErrors] = useState()
 
     //Update posts on timeline
-    function addTimelinePost(response){
+    function addTimelinePost(response) {
         let newTimelinePosts = timelinePosts.data.clone()
         newTimelinePosts.save(response)
         setTimelinePosts({data: newTimelinePosts})
         setOpen(false)
     }
 
+    function removeTimelinePost(response) {
+        //
+    }
+
     useEffect(() => {
-        if(edit) {
+        if (edit) {
             const filter = timelinePosts.data.filter((item) => item.id === edit)
             setTime(filter[0].time)
             setPostId(filter[0].post_id)
@@ -28,17 +32,24 @@ function TimelinePostForm({timelineId, posts, startTime, endTime, timelinePosts,
     let params = {
         time: time,
         post_id: postId,
-        timeline_id: timelineId
+        timeline_id: timelineId,
     }
 
-    if(edit){
+    if (edit) {
         params.id = edit
+    }
+
+    function remove(e) {
+        e.preventDefault()
+        Fetcher.api('backend').delete('timeline_posts', {id: edit})
+            .then(response => removeTimelinePost(response.data))
+            .catch(errors => setErrors(errors))
     }
 
     function submit(e) {
         e.preventDefault()
 
-        if(!edit) {
+        if (!edit) {
             Fetcher.api('backend').store('timeline_posts', params)
                 .then(response => addTimelinePost(response.data))
                 .catch(errors => setErrors(errors))
@@ -50,20 +61,13 @@ function TimelinePostForm({timelineId, posts, startTime, endTime, timelinePosts,
     }
 
     return <form className={'col-span-12 form'}>
-        <div className={'between mb-4'}>
-            <i>Post time must be between
-                <b>{startTime.split('T')[1]}</b>
-                and <b>{endTime.split('T')[1]}</b>
-                of <b>{startTime.split('T')[0]}</b>
-            </i>
-        </div>
         <fieldset>
             <div className={'form__block'}>
                 <label>Time</label>
                 <input
-                    type={'datetime-local'}
+                    type={'number'}
                     value={time}
-                    placeholder={'Title'}
+                    placeholder={'time'}
                     onChange={event => setTime(event.target.value)}
                     id={'time'}
                     name={'time'}
@@ -87,7 +91,10 @@ function TimelinePostForm({timelineId, posts, startTime, endTime, timelinePosts,
         <div className={'flex items-center'}>
             {response && <div className={'btn btn--success'}>Timeline created</div>}
             {/*{errors && <div className={'btn btn--error'}>{errors.errors[0]}</div>}*/}
-            <button className={'btn btn--primary ml-auto mt-4'} onClick={submit}>Submit</button>
+            <div className={'ml-auto'}>
+                <button className={'btn btn--primary mt-4'} onClick={submit}>{edit ? 'Edit' : 'Submit'}</button>
+                {edit && <button className={'btn btn--warning mt-4 ml-4'} onClick={(e) => remove(e)}>Remove</button>}
+            </div>
         </div>
     </form>
 }

@@ -1,20 +1,15 @@
 import Link from 'next/link'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
+import Pusher from 'pusher-js'
 import {useAuth} from '@/hooks/auth'
 import {useEffect, useState} from 'react'
-import {Fetcher} from 'ra-fetch'
 import Echo from 'laravel-echo'
 import axios from '@/lib/axios'
-import {data} from 'autoprefixer'
 
 function SidebarExtra() {
 
     const {user} = useAuth({middleware: 'auth'})
     const [notifications, setNotifications] = useState([])
-
-    function test(data) {
-
-    }
 
     useEffect(() => {
         if (user?.id) {

@@ -5,10 +5,16 @@
     color: white;
     font-weight: 800;
     text-transform: uppercase;
+    display: inline-block;
 
     &--primary {
         @apply bg-primary;
         box-shadow: 0 1px 3px 0 #696cff;
+    }
+
+    &--warning {
+        @apply bg-warning;
+        box-shadow: 0 1px 3px 0 #683e19;
     }
 
     &--success {
@@ -31,6 +37,7 @@
         font-size: 14px;
         min-height: 30px;
         min-width: 30px;
+        width: 32px;
         display: block;
     }
 }

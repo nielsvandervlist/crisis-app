@@ -20,7 +20,7 @@ const Create = () => {
                 <title>Laravel - Dashboard</title>
             </Head>
 
-            <CrisisForm requestType={'post'}/>
+            <CrisisForm requestType={'store'}/>
 
         </AppLayout>
     )

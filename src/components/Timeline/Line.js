@@ -1,7 +1,7 @@
 import {useEffect, useRef, useState} from 'react'
 import EditBox from '@/components/Timeline/EditBox'
 
-function Line({setOpen, open, startTime, endTime, timelinePosts, setTimelinePosts, timeline, edit, setEdit}) {
+function Line({setOpen, open, duration, timelinePosts, edit, setEdit}) {
 
     const [line, setLine] = useState({
         blocks: [],
@@ -13,16 +13,13 @@ function Line({setOpen, open, startTime, endTime, timelinePosts, setTimelinePost
     useEffect(() => {
 
         //For spots
-        const startDate = new Date(startTime)
-        const endDate = new Date(endTime)
-        const minutes = (Math.abs(startDate - endDate) / 1000) / 60
+        const minutes = duration * 60
         let timeBlock = []
         let placement = []
 
         timelinePosts.data.forEach((post) => {
 
-            const postDate = new Date(post.time)
-            const minute = (Math.abs(startDate - postDate) / 1000) / minutes
+            const minute = post.time
 
             const width = document.querySelector('#line').offsetWidth
 
@@ -35,7 +32,9 @@ function Line({setOpen, open, startTime, endTime, timelinePosts, setTimelinePost
             })
         })
 
-        for (let i = 0; i <= minutes; i = i + 5) {
+        const blocksTimes = minutes > 60 ? 20 : duration > 120 ? 30 : 5
+
+        for (let i = 0; i <= minutes; i = i + blocksTimes) {
             timeBlock.push(i + ':00')
         }
 
@@ -44,14 +43,14 @@ function Line({setOpen, open, startTime, endTime, timelinePosts, setTimelinePost
             minutes: minutes,
             posts: placement,
         })
-    }, [startTime, endTime, timelinePosts])
+    }, [duration, timelinePosts])
 
     return <div className={'timeline__line'}>
         <div className={'timeline-posts__wrapper'}>
             <div className={'timeline-posts__edit-wrapper relative'}>
                 {
                     line.posts.map((post, index) => {
-                        return <div className={'absolute'} key={index} style={{left: post.pixels}}>
+                        return <div className={'absolute'} onClick={() => setEdit(post.post_id)} key={index} style={{left: post.pixels}}>
                             <EditBox
                                 setOpen={setOpen}
                                 open={open}
@@ -64,7 +63,7 @@ function Line({setOpen, open, startTime, endTime, timelinePosts, setTimelinePost
                     })
                 }
             </div>
-            <div className={'timeline-posts__line cursor-pointer'} onClick={() => setOpen(true)}>
+            <div className={'timeline-posts__line cursor-pointer'} onClick={() => setOpen(true) && setEdit(false) && console.log('open')}>
                 <div className={'timeline-posts-post timeline-posts-post__add'}/>
                 <div className={'timeline-posts-done'}/>
             </div>

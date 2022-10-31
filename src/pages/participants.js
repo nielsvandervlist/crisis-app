@@ -25,14 +25,17 @@ const Participants = () => {
         <AppLayout
             header={
                 <h2 className="font-semibold text-xl text-gray-800 leading-tight">
+                    Participants
                 </h2>
             }>
 
             <Head>
-                <title>Laravel - Overview</title>
+                <title>Participants</title>
             </Head>
 
-            <div className={'flex w-full col-span-12 mb-2'}>
+            <div className={'card col-span-4 flex flex-col'}>
+                <h3 className={'mb-4'}>Ont this page you can view your participants</h3>
+                <p className={'mb-8'}>Or you can create a new one! Also you can edit or delete your participants easily from here.</p>
                 <button className={'btn btn--primary'}><Link href={`participants/create`}><a>Create participant</a></Link></button>
             </div>
 

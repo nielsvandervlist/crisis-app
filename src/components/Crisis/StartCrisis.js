@@ -3,25 +3,25 @@ import {useState} from 'react'
 import {useApi} from 'ra-fetch'
 import {Fetcher} from 'a-fetch'
 
-function StartCrisis({crises}){
+function StartCrisis({crises, setActiveCrisis}){
 
-    const [activeCrisis, setActiveCrisis] = useState()
+    const [crisis, setCrisis] = useState()
 
     function submit() {
         Fetcher.api('backend').update('crises', {
-            'id': activeCrisis,
+            'id': crisis,
             'status': 1,
-        }).then(res => console.log(res)).catch(err => console.log(err))
+        }).then(res => setActiveCrisis(res)).catch(err => console.log(err))
     }
 
     return <div className={'card col-span-4 mb-2 flex flex-col'}>
+        <h3 className={'mb-4'}>Select a crisis to start and run the timeline</h3>
         {
-            crises.data.length > 0 &&
+            crises.data.length > 0 ?
             <div className={'form__block'}>
-                <h3 className={'mb-4'}>Select a crisis to start and run the timeline</h3>
                 <select
-                    value={activeCrisis}
-                    onChange={event => setActiveCrisis(event.target.value)}
+                    value={crisis}
+                    onChange={event => setCrisis(event.target.value)}
                 >
                     <option>Select a crisis</option>
                     {
@@ -30,7 +30,7 @@ function StartCrisis({crises}){
                         })
                     }
                 </select>
-            </div>
+            </div> : <p className={'block'}>You dont have any crises created yet, first create a new crisis to start one.</p>
         }
         <button onClick={submit} className={'mt-auto btn btn--success'}>Start crisis</button>
     </div>

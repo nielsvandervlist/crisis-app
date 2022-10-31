@@ -4,23 +4,23 @@ import {useEffect, useState} from 'react'
 import {useAuth} from '@/hooks/auth'
 import AppLayout from '@/components/Layouts/AppLayout'
 import Head from 'next/head'
-import CrisisForm from '@/components/Forms/CrisisForm'
+import Form from '@/components/Companies/Form'
 
 const Crisis = () => {
 
     const router = useRouter()
     const { pid } = router.query
-    const [crisis, setCrisis] = useState()
+    const [company, setCompany] = useState()
 
     const { user } = useAuth({ middleware: 'auth' })
 
     useEffect(() => {
         if(user?.id)
             Fetcher.api('backend')
-                .show('crises', {
+                .show('companies', {
                     id: pid,
                 })
-                .then(response => setCrisis(response))
+                .then(response => setCompany(response))
 
     }, [user?.id])
 
@@ -28,15 +28,15 @@ const Crisis = () => {
         <AppLayout
             header={
                 <h2 className="font-semibold text-xl text-gray-800 leading-tight">
-                    Dashboard
+                    Edit Company
                 </h2>
             }>
 
             <Head>
-                <title>Edit Crisis</title>
+                <title>Edit Company</title>
             </Head>
 
-            {crisis && <CrisisForm requestType={'update'} id={pid} crisis={crisis}/>}
+            {company && <Form requestType={'update'} id={pid} company={company}/>}
 
         </AppLayout>
     )

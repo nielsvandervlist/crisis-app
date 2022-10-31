@@ -47,10 +47,21 @@ export default function List({items, setItems, type}) {
                                 return <td className={'p-4'} key={index}>{value}</td>
                             })
                         }
-                        <td className={'p-4'}><Link href={`/posts/${item.id}`}><a className={'btn btn--primary btn--label btn--icon'}><FontAwesomeIcon
-                            icon="pen-to-square"/></a></Link></td>
-                        <td className={'p-4 cursor-pointer'} onClick={() => submitDelete(item.id)}>
-                            <div className={'btn btn--primary btn--label btn--icon'}><FontAwesomeIcon icon="trash-can"/></div>
+                        <td className={'p-4 cursor-pointer flex'}>
+                            <div className={'flex ml-auto'}>
+                                <Link href={`/${type}/${item.id}`}>
+                                    <a
+                                        className={'btn btn--primary btn--label btn--icon mr-4'}>
+                                        <FontAwesomeIcon icon="pen-to-square"/>
+                                    </a>
+                                </Link>
+                                <div
+                                    onClick={() => submitDelete(item.id)}
+                                    className={'btn btn--primary btn--label btn--icon'}
+                                >
+                                    <FontAwesomeIcon icon="trash-can"/>
+                                </div>
+                            </div>
                         </td>
                     </tr>
                 })

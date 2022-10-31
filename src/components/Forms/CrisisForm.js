@@ -9,7 +9,7 @@ function CrisisForm({requestType, crisis, id}) {
     const [title, setTitle] = useState(crisis ? crisis.data.title : '')
     const [description, setDescription] = useState(crisis ? crisis.data.description : '')
     const [company, setCompany] = useState(crisis ? crisis.data.company_id : '')
-    const [status, setStatus] = useState(crisis ? crisis.data.status: false)
+    const [status, setStatus] = useState(crisis ? crisis.data.status : 0)
     const [response, setResponse] = useState()
     const [errors, setErrors] = useState()
     const [companies, setCompanies] = useState({data: []})
@@ -79,7 +79,7 @@ function CrisisForm({requestType, crisis, id}) {
                 />
             </div>
             {companies.data.length > 0 && <div className={'form__block'}>
-                <label>Type of crisis</label>
+                <label>Company</label>
                 <select
                     value={company}
                     onChange={event => setCompany(event.target.value)}
@@ -94,7 +94,7 @@ function CrisisForm({requestType, crisis, id}) {
             </div>}
         </fieldset>
         <div className={'flex items-center'}>
-            {response && <div className={'btn btn--success'}>Post created</div>}
+            {response && <div className={'btn btn--success'}>Crisis created</div>}
             {errors && <div className={'btn btn--error'}>{errors.errors[0]}</div>}
             <button className={'btn btn--primary ml-auto mt-4'} onClick={(e) => submit(e)}>Submit</button>
         </div>

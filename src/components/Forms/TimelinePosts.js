@@ -1,7 +1,6 @@
 import {useEffect, useRef, useState} from 'react'
 import {Fetcher, useApi, useIndex} from 'ra-fetch'
 import {useAuth} from '@/hooks/auth'
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import Modal from '@/components/Modal/Modal'
 import TimelinePostForm from '@/components/Forms/TimelinePostForm'
 import Line from '@/components/Timeline/Line'
@@ -9,13 +8,12 @@ import GetParticipants from '@/components/Participants/GetParticipants'
 import TimelinePostsHeader from '@/components/Timeline/TimelinePostsHeader'
 import TimelinePostsFooter from '@/components/Timeline/TimelinePostsFooter'
 
-function TimelinePosts({startTime, endTime, title, timeline}) {
+function TimelinePosts({duration, title, timeline}) {
 
     const {user} = useAuth({middleware: 'auth'})
     const [open, setOpen] = useState(false)
     const [posts, setPosts] = useState('')
     const [timelinePosts, setTimelinePosts] = useState([])
-    const [dateString, setDateString] = useState()
     const [edit, setEdit] = useState()
 
     useEffect(() => {
@@ -32,13 +30,10 @@ function TimelinePosts({startTime, endTime, title, timeline}) {
     }, [user?.id])
 
     useEffect(() => {
-        if (!(startTime instanceof Date)) {
-            setDateString(new Date(startTime))
+        if(!open){
+            setEdit(false)
         }
-
-        setDateString(startTime.toLocaleString('default', {day: 'numeric', month: 'long'}).split(' '))
-
-    }, [startTime])
+    }, [open])
 
     if (timelinePosts.loading || timelinePosts.length < 1) {
         return <></>
@@ -54,8 +49,7 @@ function TimelinePosts({startTime, endTime, title, timeline}) {
             timeline={timeline}
             timelinePosts={timelinePosts}
             setOpen={setOpen}
-            startTime={startTime}
-            endTime={endTime}
+            duration={duration}
             open={open}
             edit={edit}
             setEdit={setEdit}
@@ -67,8 +61,7 @@ function TimelinePosts({startTime, endTime, title, timeline}) {
             <TimelinePostForm
                 timelinePosts={timelinePosts}
                 setTimelinePosts={setTimelinePosts}
-                startTime={startTime}
-                endTime={endTime}
+                duration={duration}
                 posts={posts}
                 user={user}
                 timelineId={timeline.data.id}

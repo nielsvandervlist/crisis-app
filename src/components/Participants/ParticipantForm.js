@@ -75,7 +75,7 @@ function ParticipantForm({requestType, id, participant}){
                 />
             </div>
             {!companies.loading && <div className={'form__block'}>
-                <label>Post</label>
+                <label>Company</label>
                 <select
                     value={companyId}
                     onChange={event => setCompanyId(event.target.value)}
@@ -90,7 +90,7 @@ function ParticipantForm({requestType, id, participant}){
             </div>}
         </fieldset>
         <div className={'flex items-center'}>
-            {response && <div className={'btn btn--success'}>Post created</div>}
+            {response && <div className={'btn btn--success'}>Participant created</div>}
             {errors && <div className={'btn btn--error'}>{errors.errors[0]}</div>}
             <button className={'btn btn--primary ml-auto mt-4'} onClick={(e) => submit(e)}>Submit</button>
         </div>

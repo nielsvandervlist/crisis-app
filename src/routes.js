@@ -21,6 +21,7 @@ const backend = Router.api('backend', `${process.env.NEXT_PUBLIC_BACKEND_URL}`)
     .index('companies', '/api/companies')
     .show('companies', '/api/companies/{id}')
     .store('companies', '/api/companies', {form_data: true})
+    .update('companies', '/api/companies/{id}', {form_data: true})
     .delete('companies', '/api/companies/{id}')
 
     .index('rapports', '/api/rapports')

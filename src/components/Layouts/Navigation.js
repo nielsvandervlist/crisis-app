@@ -1,15 +1,10 @@
-import Pusher from 'pusher-js'
-import Dropdown from '@/components/Dropdown'
-import ResponsiveNavLink, { ResponsiveNavButton } from '@/components/ResponsiveNavLink'
-import { DropdownButton } from '@/components/DropdownLink'
 import { useAuth } from '@/hooks/auth'
 import { useRouter } from 'next/router'
-import {useEffect, useState} from 'react'
-import Echo from 'laravel-echo'
-import axios from '@/lib/axios'
+import {useState} from 'react'
 import Login from '@/components/Layouts/Navigation/Login'
 import Hamburger from '@/components/Layouts/Navigation/Hamburger'
 import Menu from '@/components/Layouts/Navigation/Menu'
+import Link from 'next/link'
 
 const Navigation = ({header, user}) => {
     const router = useRouter()
@@ -19,7 +14,7 @@ const Navigation = ({header, user}) => {
 
     return (
         <nav className="bg-white border-b border-gray-100 m-6 mb-0 card">
-            <div className="max-w-7xl mx-auto">
+            <div className="mx-auto">
                 <div className="flex">
                     {header}
                     <Login user={user} logout={logout}/>

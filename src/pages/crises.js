@@ -13,6 +13,7 @@ const Crises = () => {
 
     const {user} = useAuth({middleware: 'auth'})
     const [crises, setCrises] = useState()
+    const [activeCrisis, setActiveCrisis] = useState()
 
     useEffect(() => {
         if (user?.id) {
@@ -23,10 +24,6 @@ const Crises = () => {
                 .then((res) => setCrises(res))
         }
     }, [user?.id])
-
-    if (!crises) {
-        return <></>
-    }
 
     return (
         <AppLayout
@@ -40,9 +37,13 @@ const Crises = () => {
                 <title>Laravel - Dashboard</title>
             </Head>
 
-            <StartCrisis crises={crises}/>
-            <CreateCrisis/>
-            <OnlineCrisis crises={crises}/>
+            {
+                crises && <>
+                    <StartCrisis crises={crises} setActiveCrisis={setActiveCrisis}/>
+                    <CreateCrisis/>
+                    <OnlineCrisis crises={crises} activeCrisis={activeCrisis} setActiveCrisis={setActiveCrisis}/>
+                </>
+            }
 
             {crises && <List items={crises} setItems={setCrises} type={'crises'}/>}
 

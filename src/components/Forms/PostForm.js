@@ -9,6 +9,7 @@ function PostForm({requestType, id, post}) {
     const [title, setTitle] = useState(post ? post.data.title : '')
     const [description, setDescription] = useState(post ? post.data.description : '')
     const [type, setType] = useState(post ? post.data.post_type_id : '')
+    // const [image, setImage] = useState(post ? post.data.image : '')
     const [response, setResponse] = useState()
     const [errors, setErrors] = useState()
     const [postTypes, setPostTypes] = useState({data: []})
@@ -37,7 +38,6 @@ function PostForm({requestType, id, post}) {
 
     function submit(e) {
         e.preventDefault()
-
         if (requestType === 'store') {
             Fetcher.api('backend').store('posts', params)
                 .then(response => setResponse(response))
@@ -51,8 +51,25 @@ function PostForm({requestType, id, post}) {
         }
     }
 
-    return <form className={'card col-span-12 form'}>
+    return <form className={'card col-span-6 form'}>
         <fieldset>
+            {
+                postTypes.data.length > 0 &&
+                <div className={'form__block'}>
+                    <label>Type of post</label>
+                    <select
+                        value={type}
+                        onChange={event => setType(event.target.value)}
+                    >
+                        <option>Select a option</option>
+                        {
+                            postTypes.data.map((type, index) => {
+                                return <option key={index} value={type.id}>{type.name}</option>
+                            })
+                        }
+                    </select>
+                </div>
+            }
             <div className={'form__block'}>
                 <label>Title</label>
                 <input
@@ -75,20 +92,6 @@ function PostForm({requestType, id, post}) {
                     name={'description'}
                 />
             </div>
-            {postTypes.data.length > 0 && <div className={'form__block'}>
-                <label>Type of post</label>
-                <select
-                    value={type}
-                    onChange={event => setType(event.target.value)}
-                >
-                    <option>Select a option</option>
-                    {
-                        postTypes.data.map((type, index) => {
-                            return <option key={index} value={type.id}>{type.name}</option>
-                        })
-                    }
-                </select>
-            </div>}
         </fieldset>
         <div className={'flex items-center'}>
             {response && <div className={'btn btn--success'}>Post created</div>}

@@ -1,8 +1,10 @@
 import Dropdown from '@/components/Dropdown'
 import {DropdownButton} from '@/components/DropdownLink'
+import Link from 'next/link'
 
 function Login({user, logout}){
     return <div className="hidden sm:flex ml-auto sm:items-center">
+        <img src={'/images/Portrait_Placeholder.png'} className={'w-8 h-8 rounded-full mr-4'} alt={''}/>
         <Dropdown
             align="right"
             width="48"
@@ -26,6 +28,7 @@ function Login({user, logout}){
             }>
 
             {/* Authentication */}
+            <DropdownButton><Link href={'/profile'}><a>Profile</a></Link></DropdownButton>
             <DropdownButton onClick={logout}>
                 Logout
             </DropdownButton>

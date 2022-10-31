@@ -22,6 +22,7 @@ const Dashboard = () => {
                 .index('crises', {
                     user_id: user?.id,
                     status: 1,
+                    company: true,
                 })
                 .then(response => setCrises(response))
         }

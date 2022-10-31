@@ -20,10 +20,21 @@ import {
     faThumbsUp,
     faShareAlt,
     faUsers,
-    faHeart,
+    faHeart, faArrowLeft,
 } from '@fortawesome/free-solid-svg-icons'
 
+import {
+    faTwitter,
+    faFacebook,
+    faYoutube,
+    faLinkedin,
+} from '@fortawesome/free-brands-svg-icons'
+
 library.add(
+    faLinkedin,
+    faYoutube,
+    faTwitter,
+    faFacebook,
     faHeart,
     faUser,
     faUsers,
@@ -41,7 +52,8 @@ library.add(
     faPenToSquare,
     faTrashCan,
     faEllipsisVertical,
-    faCircleXmark
+    faCircleXmark,
+    faArrowLeft,
 )
 
 const App = ({Component, pageProps}) => <Component {...pageProps} />

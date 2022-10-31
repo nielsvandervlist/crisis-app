@@ -2,14 +2,12 @@ import {useEffect, useState} from 'react'
 import {Fetcher, useApi, useIndex} from 'ra-fetch'
 import {useAuth} from '@/hooks/auth'
 
-function TimelineForm({startTime, endTime, setStartTime, setEndTime, title, setTitle, setTimeline}) {
+function TimelineForm({duration, setDuration, title, setTitle, setTimeline, crisis, setCrisis, company, setCompany}) {
 
     const {user} = useAuth({middleware: 'auth'})
-    const [company, setCompany] = useState()
     const [response, setResponse] = useState()
     const [errors, setErrors] = useState()
     const [crises, setCrises] = useState()
-    const [crisis, setCrisis] = useState()
 
     const companies = useApi('backend').index('companies')
 
@@ -17,8 +15,7 @@ function TimelineForm({startTime, endTime, setStartTime, setEndTime, title, setT
         e.preventDefault()
         Fetcher.api('backend').store('timelines', {
             title: title,
-            start_time: startTime,
-            end_time: endTime,
+            duration: duration,
             company_id: company,
             crisis_id: crisis,
             user_id: user.id,
@@ -34,9 +31,10 @@ function TimelineForm({startTime, endTime, setStartTime, setEndTime, title, setT
 
     }, [user?.id])
 
-    return <form className={'card col-span-12 form'}>
-        <fieldset>
-            <div className={'form__block'}>
+    return <form className={'card col-span-8 form'}>
+        <fieldset className={'grid grid-cols-12 gap-4'}>
+            <h3 className={'col-span-12'}>Timeline form</h3>
+            <div className={'form__block col-span-12'}>
                 <label>Title</label>
                 <input
                     type={'text'}
@@ -47,27 +45,17 @@ function TimelineForm({startTime, endTime, setStartTime, setEndTime, title, setT
                     name={'title'}
                 />
             </div>
-            <div className={'form__block'}>
-                <label>Start time</label>
+            <div className={'form__block col-span-6'}>
+                <label>Duration in hours</label>
                 <input
-                    type={'datetime-local'}
-                    value={startTime}
-                    onChange={event => setStartTime(event.target.value)}
-                    id={'startTime'}
-                    name={'startTime'}
+                    type={'number'}
+                    value={duration}
+                    onChange={event => setDuration(event.target.value)}
+                    id={'duration'}
+                    name={'duration'}
                 />
             </div>
-            <div className={'form__block'}>
-                <label>End time</label>
-                <input
-                    type={'datetime-local'}
-                    value={endTime}
-                    onChange={event => setEndTime(event.target.value)}
-                    id={'endTime'}
-                    name={'endTime'}
-                />
-            </div>
-            <div className={'form__block'}>
+            <div className={'form__block col-span-6'}>
                 <label>Company</label>
                 <select
                     value={company}
@@ -83,7 +71,7 @@ function TimelineForm({startTime, endTime, setStartTime, setEndTime, title, setT
             </div>
             {
                 crises && !crises.loading && crises.data.length > 0 &&
-                <div className={'form__block'}>
+                <div className={'form__block col-span-6'}>
                     <label>Crisis</label>
                     <select
                         value={crisis}
