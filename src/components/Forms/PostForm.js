@@ -1,6 +1,7 @@
 import {useEffect, useState} from 'react'
 import {Fetcher, useApi, useIndex} from 'ra-fetch'
 import {useAuth} from '@/hooks/auth'
+import Link from 'next/link'
 
 function PostForm({requestType, id, post}) {
 
@@ -9,6 +10,7 @@ function PostForm({requestType, id, post}) {
     const [title, setTitle] = useState(post ? post.data.title : '')
     const [description, setDescription] = useState(post ? post.data.description : '')
     const [type, setType] = useState(post ? post.data.post_type_id : '')
+    const [online, setOnline] = useState(post ? (!!post.data.online) : false)
     // const [image, setImage] = useState(post ? post.data.image : '')
     const [response, setResponse] = useState()
     const [errors, setErrors] = useState()
@@ -30,6 +32,7 @@ function PostForm({requestType, id, post}) {
         description: description,
         post_type_id: type,
         user_id: user.id,
+        online: online ? 1 : 0
     }
 
     if (id) {
@@ -92,6 +95,24 @@ function PostForm({requestType, id, post}) {
                     name={'description'}
                 />
             </div>
+            {
+                id &&
+                <div className={'form__block'}>
+                    <label>Once set online the post appears on the overview page. The post can be seen by the
+                        participants. Make sure the <Link href={'/crises'}><a
+                            className={'underline'}> crisis</a></Link> is running as well</label>
+                    <input
+                        type={'checkbox'}
+                        value={online}
+                        checked={online}
+                        placeholder={'Online'}
+                        onChange={event => setOnline(!online)}
+                        id={'online'}
+                        name={'online'}
+                    />
+                    <label htmlFor={'online'} className={'mr-4 mb-0'}>Set online</label>
+                </div>
+            }
         </fieldset>
         <div className={'flex items-center'}>
             {response && <div className={'btn btn--success'}>Post created</div>}

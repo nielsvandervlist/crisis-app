@@ -1,27 +1,17 @@
-import {useAuth} from '@/hooks/auth'
 import {useEffect, useState} from 'react'
-import {Fetcher} from 'ra-fetch'
-import GetParticipants from '@/components/Participants/GetParticipants'
+import {Fetcher, useApi, useIndex} from 'ra-fetch'
+import {useAuth} from '@/hooks/auth'
 
-function CrisisForm({requestType, crisis, id}) {
+function ReactionForm({requestType, id, reaction}) {
 
     const {user} = useAuth({middleware: 'auth'})
 
-    const [title, setTitle] = useState(crisis ? crisis.data.title : '')
-    const [description, setDescription] = useState(crisis ? crisis.data.description : '')
-    const [company, setCompany] = useState(crisis ? crisis.data.company_id : '')
-    const [status, setStatus] = useState(crisis ? crisis.data.status : 0)
+    const [title, setTitle] = useState(reaction ? reaction.data.title : '')
+    const [description, setDescription] = useState(reaction ? reaction.data.description : '')
+    const [src, setSrc] = useState(reaction ? reaction.data.src : '')
+    const [participant, setParticipant] = useState(reaction ? reaction.data.user_id : '')
     const [response, setResponse] = useState()
     const [errors, setErrors] = useState()
-    const [companies, setCompanies] = useState({data: []})
-
-    useEffect(() => {
-        Fetcher.api('backend').index('companies')
-            .then((res) => {
-                setCompanies(res)
-            })
-            .catch(err => setErrors(err))
-    }, [])
 
     if (!user) {
         return <></>
@@ -29,10 +19,9 @@ function CrisisForm({requestType, crisis, id}) {
 
     const params = {
         title: title,
+        user_id: user?.id,
+        src: src,
         description: description,
-        company_id: company,
-        user_id: user.id,
-        status: status
     }
 
     if (id) {
@@ -41,21 +30,20 @@ function CrisisForm({requestType, crisis, id}) {
 
     function submit(e) {
         e.preventDefault()
-
         if (requestType === 'store') {
-            Fetcher.api('backend').store('crises', params)
+            Fetcher.api('backend').store('reactions', params)
                 .then(response => setResponse(response))
                 .catch(errors => setErrors(errors))
         }
 
         if (requestType === 'update') {
-            Fetcher.api('backend').update('crises', params)
+            Fetcher.api('backend').update('reactions', params)
                 .then(response => setResponse(response))
                 .catch(errors => setErrors(errors))
         }
     }
 
-    return <form className={'card col-span-12 form'}>
+    return <form className={'form'}>
         <fieldset>
             <div className={'form__block'}>
                 <label>Title</label>
@@ -79,31 +67,24 @@ function CrisisForm({requestType, crisis, id}) {
                     name={'description'}
                 />
             </div>
-            {companies.data.length > 0 && <div className={'form__block'}>
-                <label>Company</label>
-                <select
-                    value={company}
-                    onChange={event => setCompany(event.target.value)}
-                >
-                    <option>Select a option</option>
-                    {
-                        companies.data.map((company, index) => {
-                            return <option key={index} value={company.id}>{company.name}</option>
-                        })
-                    }
-                </select>
-            </div>}
             <div className={'form__block'}>
-                <label>Participants</label>
-                {company && <GetParticipants company_id={company.id}/>}
+                <label>Src</label>
+                <input
+                    type={'text'}
+                    value={src}
+                    placeholder={'Src'}
+                    onChange={event => setSrc(event.target.value)}
+                    id={'src'}
+                    name={'src'}
+                />
             </div>
         </fieldset>
         <div className={'flex items-center'}>
-            {response && <div className={'btn btn--success'}>Crisis created</div>}
+            {response && <div className={'btn btn--success'}>Reaction created</div>}
             {errors && <div className={'btn btn--error'}>{errors.errors[0]}</div>}
             <button className={'btn btn--primary ml-auto mt-4'} onClick={(e) => submit(e)}>Submit</button>
         </div>
     </form>
 }
 
-export default CrisisForm
+export default ReactionForm

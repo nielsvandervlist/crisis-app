@@ -1,20 +1,21 @@
 import AppLayout from '@/components/Layouts/AppLayout'
 import Head from 'next/head'
-import List from '@/components/Lists/List'
 import {useAuth} from '@/hooks/auth'
-import {Fetcher, useIndex} from 'ra-fetch'
+import {Fetcher} from 'ra-fetch'
 import {useEffect, useState} from 'react'
-import Twitter from '@/components/PostTypes/Twitter'
-import Facebook from '@/components/PostTypes/Facebook'
-import Youtube from '@/components/PostTypes/Youtube'
 import Timeline from '@/components/Timeline/Timeline'
 import RunCrisis from '@/components/Crisis/RunCrisis'
+import ReactionForm from '@/components/Forms/ReactionForm'
+import Modal from '@/components/Modal/Modal'
+import PostWrapper from '@/components/PostTypes/PostWrapper'
 
 const Dashboard = () => {
 
     const {user} = useAuth({middleware: 'auth'})
     const [crises, setCrises] = useState()
-    const [timeline, setTimeline] = useState()
+    const [reaction, setReaction] = useState()
+    const [timelinePosts, setTimelinePosts] = useState()
+    const [open, setOpen] = useState(false)
 
     useEffect(() => {
         if (user?.id) {
@@ -23,11 +24,27 @@ const Dashboard = () => {
                     user_id: user?.id,
                     status: 1,
                     company: true,
+                    timeline: true,
                 })
                 .then(response => setCrises(response))
         }
 
     }, [user?.id])
+
+    useEffect(() => {
+
+        if(crises && crises.data.length > 0) {
+
+            Fetcher.api('backend')
+                .index('timeline_posts', {
+                    user_id: user?.id,
+                    timline_id: crises.data[0].timeline.id,
+                    post: true,
+                    post_type: true,
+                })
+                .then(response => setTimelinePosts(response))
+        }
+    }, [crises])
 
     return (
         <AppLayout
@@ -38,20 +55,31 @@ const Dashboard = () => {
             <Head>
                 <title>Laravel - Dashboard</title>
             </Head>
-
             {
                 crises &&
                 <RunCrisis crises={crises}/>
             }
             {
-                timeline &&
+                crises && crises.data.length > 0 && crises.data[0].timeline &&
                 <div className={'online-timeline col-span-12'}>
-                    <Timeline/>
+                    <Timeline edit={crises.data[0].timeline}/>
+                </div>
+            }
+            {
+                timelinePosts &&
+                <div className={'social-posts col-span-12'}>
+                    {
+                        timelinePosts.data.map((timelinePost, index) => {
+                            return <div key={index}><PostWrapper post={timelinePost.post} setOpen={setOpen}/></div>
+                        })
+                    }
                 </div>
             }
 
-            <div className={'social-posts col-span-12 card'}>
-            </div>
+
+            <Modal open={open} setOpen={setOpen}>
+                <ReactionForm requestType={'store'}/>
+            </Modal>
 
         </AppLayout>
     )

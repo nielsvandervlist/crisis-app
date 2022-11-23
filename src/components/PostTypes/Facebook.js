@@ -1,17 +1,18 @@
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 
-function Facebook(){
+function Facebook({social}){
     return <div className={'facebook'}>
         <div className={'facebook__header'}>
             <div className={'flex'}>
                 <img className={'rounded-full w-8 h-8'} src={'/images/Portrait_Placeholder.png'} alt={''}/>
                 <div className={'facebook__header__info'}>
-                    <span>Hans teeuwen</span>
+                    <span>John Doe</span>
                     <span>5 mins . <FontAwesomeIcon icon="users"/></span>
                 </div>
             </div>
             <FontAwesomeIcon icon="ellipsis-vertical"/>
-            <h3>Ttitle</h3>
+            <h3>{social.title}</h3>
+            <p>{social.description}</p>
         </div>
         <img src={'/images/placeholder.png'} className={'w-full'} alt={''}/>
         <div className={'facebook__body'}>

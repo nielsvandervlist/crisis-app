@@ -24,13 +24,9 @@ function Timeline({edit}) {
         }
     }, [])
 
-    if(!timeline){
-        return <></>
-    }
-
     return <>
         {
-            router.pathname === '/timelines/create' || `'timelines/${timeline.id}` &&
+            router.pathname === ('/timelines/create' || `'timelines/${timeline.id}`) &&
             <TimelineForm
                 setTimeline={setTimeline}
                 title={title}

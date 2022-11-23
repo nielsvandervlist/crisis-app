@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import Pusher from 'pusher-js'
 import {useAuth} from '@/hooks/auth'
 import {useEffect, useState} from 'react'
@@ -31,6 +30,7 @@ function SidebarExtra() {
                                 .then(response => {
                                     callback(null, response.data)
                                 })
+
                                 .catch(error => {
                                     callback(error)
                                 })
@@ -39,10 +39,21 @@ function SidebarExtra() {
                 },
             })
 
+            // echo
+            //     .private('App.Models.User.' + user?.id)
+            //     .listen('.user.reaction', (data) => {
+            //
+            //         console.log(data)
+            //
+            //         // setNotifications((oldNotifications) => [...oldNotifications, data])
+            //     })
             echo
-                .private('App.Models.User.' + user?.id)
-                .listen('.user.reaction', (data) => {
-
+                // .private('timeline-channel.' + user?.id)
+                .channel('timeline-channel.' + user?.id)
+                .subscribed(() => {
+                    console.log('You are subscribed')
+                })
+                .listen('.timeline.post', (data) => {
                     console.log(data)
 
                     // setNotifications((oldNotifications) => [...oldNotifications, data])
@@ -55,14 +66,19 @@ function SidebarExtra() {
             <ul>
                 <li>
                     <Link href={'/notifications'}>
-                        <a><FontAwesomeIcon icon="bell"/>Motifications
+                        <a>
+                            {/*<FontAwesomeIcon icon="bell"/>*/}
+                            Motifications
                             {notifications && <span>{notifications.length}</span>}
                         </a>
                     </Link>
                 </li>
                 <li>
                     <Link href={'/chat'}>
-                        <a><FontAwesomeIcon icon="comment"/>Chat</a>
+                        <a>
+                            {/*<FontAwesomeIcon icon="comment"/>*/}
+                            Chat
+                        </a>
                     </Link>
                 </li>
             </ul>

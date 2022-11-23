@@ -33,6 +33,7 @@ function TimelinePostForm({timelineId, posts, timelinePosts, setTimelinePosts, s
         time: time,
         post_id: postId,
         timeline_id: timelineId,
+        online: 0,
     }
 
     if (edit) {

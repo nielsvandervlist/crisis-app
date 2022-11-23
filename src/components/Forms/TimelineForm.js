@@ -19,6 +19,7 @@ function TimelineForm({duration, setDuration, title, setTitle, setTimeline, cris
             company_id: company,
             crisis_id: crisis,
             user_id: user.id,
+            online: 0,
         })
             .then(response => setTimeline(response))
             .catch(errors => setErrors(errors))

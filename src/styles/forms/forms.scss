@@ -6,6 +6,40 @@ input[type='text'], input[type='date'], input[type='password'], input[type='time
     width: 100%;
 }
 
+input[type='checkbox']{
+    display: none;
+    & + label {
+        padding-left: 30px;
+        position: relative;
+        &:before {
+            content: '';
+            border-radius: 6px;
+            border: 1px solid #696cff;
+            width: 20px;
+            height: 20px;
+            position: absolute;
+            left: 0;
+            top: 0;
+            font-size: 15px;
+        }
+    }
+
+    &:checked {
+        & + label {
+            &:after{
+                position: absolute;
+                left: 5px;
+                top: 5px;
+                border-radius: 3px;
+                content: '';
+                width: 10px;
+                height: 10px;
+                background: #71DD37;
+            }
+        }
+    }
+}
+
 input::placeholder {
     @apply text-gray-200;
 }
