@@ -6,7 +6,6 @@
         @apply items-center;
         border-bottom: 1px solid;
         @apply border-gray-100;
-        padding-bottom: 30px;
     }
 
     table {
@@ -16,12 +15,14 @@
             @apply border-gray-100;
 
             &:last-child {
-                border: 0px;
+                border: 0;
             }
         }
 
         thead {
-
+            th {
+                @apply bg-gray-100;
+            }
         }
     }
 }

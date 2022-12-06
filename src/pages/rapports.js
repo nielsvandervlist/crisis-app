@@ -4,6 +4,7 @@ import {useAuth} from '@/hooks/auth'
 import List from '@/components/Lists/List'
 import {useEffect, useState} from 'react'
 import {Fetcher} from 'ra-fetch'
+import Link from 'next/link'
 
 const Rapports = () => {
 
@@ -30,6 +31,10 @@ const Rapports = () => {
             <Head>
                 <title>Laravel - Overview</title>
             </Head>
+
+            <div className={'flex w-full col-span-12 mb-2'}>
+                <button className={'btn btn--primary'}><Link href={`rapports/create`}><a>Create rapport</a></Link></button>
+            </div>
 
             {rapports && <List items={rapports} setItems={setRapports} type={'rapports'}/>}
         </AppLayout>

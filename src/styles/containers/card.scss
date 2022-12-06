@@ -13,4 +13,9 @@
             margin-bottom: 20px;
         }
     }
+
+    &--np {
+        @apply p-0;
+        overflow: hidden;
+    }
 }

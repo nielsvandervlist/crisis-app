@@ -20,7 +20,9 @@ import {
     faThumbsUp,
     faShareAlt,
     faUsers,
-    faHeart, faArrowLeft,
+    faHeart,
+    faArrowLeft,
+    faSearch,
 } from '@fortawesome/free-solid-svg-icons'
 
 import {
@@ -54,6 +56,7 @@ library.add(
     faEllipsisVertical,
     faCircleXmark,
     faArrowLeft,
+    faSearch,
 )
 
 const App = ({Component, pageProps}) => <Component {...pageProps} />

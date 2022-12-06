@@ -4,8 +4,7 @@ import {useEffect, useState} from 'react'
 import {useAuth} from '@/hooks/auth'
 import AppLayout from '@/components/Layouts/AppLayout'
 import Head from 'next/head'
-import List from '@/components/Lists/List'
-import PostForm from '@/components/Forms/PostForm'
+import Info from '@/components/Rapports/Info'
 
 const Post = () => {
 
@@ -20,10 +19,15 @@ const Post = () => {
             Fetcher.api('backend')
                 .show('rapports', {
                     id: pid,
+                    info: true,
                 })
                 .then(response => setRapport(response))
 
     }, [user?.id])
+
+    if(!rapport){
+        return <></>
+    }
 
     return (
         <AppLayout
@@ -32,11 +36,9 @@ const Post = () => {
                     Dashboard
                 </h2>
             }>
-
             <Head>
                 <title>Rapport</title>
             </Head>
-
             <div className={'card col-span-12'}>
                 <Info rapport={rapport}/>
             </div>

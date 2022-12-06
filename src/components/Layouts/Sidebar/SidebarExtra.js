@@ -4,14 +4,25 @@ import {useAuth} from '@/hooks/auth'
 import {useEffect, useState} from 'react'
 import Echo from 'laravel-echo'
 import axios from '@/lib/axios'
+import Popup from '@/components/Popup/Popup'
+import {Fetcher} from 'ra-fetch'
 
 function SidebarExtra() {
 
     const {user} = useAuth({middleware: 'auth'})
     const [notifications, setNotifications] = useState([])
+    const [message, setMessage] = useState()
 
     useEffect(() => {
         if (user?.id) {
+
+            Fetcher.api('backend').index('notifications', {
+                read: 0
+            })
+                .then((res) => {
+                    setNotifications(res.data)
+                })
+
             const echo = new Echo({
                 authEndpoint: '/broadcasting/auth',
                 broadcaster: 'pusher',
@@ -39,24 +50,16 @@ function SidebarExtra() {
                 },
             })
 
-            // echo
-            //     .private('App.Models.User.' + user?.id)
-            //     .listen('.user.reaction', (data) => {
-            //
-            //         console.log(data)
-            //
-            //         // setNotifications((oldNotifications) => [...oldNotifications, data])
-            //     })
             echo
-                // .private('timeline-channel.' + user?.id)
-                .channel('timeline-channel.' + user?.id)
-                .subscribed(() => {
-                    console.log('You are subscribed')
+                .private('App.Models.User.' + user?.id)
+                .listen('.user.reaction', (data) => {
+                    setNotifications((oldNotifications) => [...oldNotifications, data])
                 })
+            echo
+                .channel('timeline-channel')
                 .listen('.timeline.post', (data) => {
-                    console.log(data)
-
-                    // setNotifications((oldNotifications) => [...oldNotifications, data])
+                    setNotifications((oldNotifications) => [...oldNotifications, data])
+                    setMessage(data)
                 })
         }
     }, [])
@@ -67,9 +70,13 @@ function SidebarExtra() {
                 <li>
                     <Link href={'/notifications'}>
                         <a>
-                            {/*<FontAwesomeIcon icon="bell"/>*/}
-                            Motifications
-                            {notifications && <span>{notifications.length}</span>}
+                            Notifications
+                            {
+                                notifications &&
+                                <span className={'notifications'}>
+                                    <span>{notifications.length}</span>
+                                </span>
+                            }
                         </a>
                     </Link>
                 </li>
@@ -83,6 +90,8 @@ function SidebarExtra() {
                 </li>
             </ul>
         </nav>
+
+        <Popup message={message} setMessage={setMessage}/>
     </div>
 }
 

@@ -45,6 +45,12 @@ const backend = Router.api('backend', `${process.env.NEXT_PUBLIC_BACKEND_URL}`)
     .store('participants', '/api/participants', {form_data: true})
     .delete('participants', '/api/participants/{id}')
 
+    .index('notifications', '/api/notifications')
+    .show('notifications', '/api/notifications/{id}')
+    .store('notifications', '/api/notifications', {form_data: true})
+    .update('notifications', '/api/notifications/{id}', {form_data: true})
+    .delete('notifications', '/api/notifications/{id}')
+
     .index('crises', '/api/crises')
     .show('crises', '/api/crises/{id}')
     .store('crises', '/api/crises', {form_data: true})

@@ -1,9 +1,19 @@
 import Link from 'next/link'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {Fetcher} from 'ra-fetch'
+import * as helpers from '@/helpers'
+import {useFilter} from '@/hooks/useFilter'
 import {useEffect} from 'react'
 
 export default function List({items, setItems, type}) {
+
+    const [Filter, sortedItems] = useFilter(items.data)
+
+    useEffect(() => {
+        if(sortedItems && sortedItems.length > 0){
+            setItems({data: sortedItems})
+        }
+    }, [sortedItems])
 
     function submitDelete(id) {
         Fetcher.api('backend').delete(type, {id: id})
@@ -26,15 +36,22 @@ export default function List({items, setItems, type}) {
     const firstItem = Object.values(items.data)[0]
     let headings = Object.keys(firstItem)
 
-    return <div className={'table-overview col-span-12 p-8 bg-white'}>
+    return <div className={'table-overview col-span-12 bg-white flex flex-col'}>
+
+        <div className={'table-overview__heading flex p-6'}>
+            <h2>{helpers.uppercaseLetter(type)} List</h2>
+            <div className={'ml-auto'}>{Filter}</div>
+        </div>
+
         <table className={'w-full'}>
             <thead>
             <tr>
                 {
                     headings.map((heading, index) => {
-                        return <th className={'text-left p-4'} key={index}>{heading}</th>
+                        return <th className={'text-left p-6'} key={index}>{helpers.uppercaseLetter(heading)}</th>
                     })
                 }
+                <th/><th/>
             </tr>
             </thead>
             <tbody>
@@ -44,10 +61,10 @@ export default function List({items, setItems, type}) {
                     return <tr key={index}>
                         {
                             values.map((value, index) => {
-                                return <td className={'p-4'} key={index}>{value}</td>
+                                return <td className={'p-6'} key={index}>{value}</td>
                             })
                         }
-                        <td className={'p-4 cursor-pointer flex'}>
+                        <td className={'p-6 cursor-pointer flex'}>
                             <div className={'flex ml-auto'}>
                                 <Link href={`/${type}/${item.id}`}>
                                     <a

@@ -33,6 +33,31 @@
         text-transform: uppercase;
     }
 
+    &--label-small {
+        padding: 2px 5px;
+        font-size: 12px;
+        font-weight: 800;
+        text-transform: uppercase;
+        @apply bg-gray-100 text-gray-300;
+    }
+
+    &--soft {
+        @apply bg-white;
+        border: 2px solid #aab8c2;
+        color: #aab8c2;
+    }
+
+    &--round {
+        width: 30px;
+        height: 30px;
+        padding: 4px 0 0;
+        text-align: center;
+        font-size: 15px;
+        font-weight: 900;
+        border-radius: 50%;
+        text-transform: uppercase;
+    }
+
     &--icon {
         font-size: 14px;
         min-height: 30px;

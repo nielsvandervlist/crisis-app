@@ -8,6 +8,8 @@ import RunCrisis from '@/components/Crisis/RunCrisis'
 import ReactionForm from '@/components/Forms/ReactionForm'
 import Modal from '@/components/Modal/Modal'
 import PostWrapper from '@/components/PostTypes/PostWrapper'
+import Link from 'next/link'
+import NewCrisis from '@/components/Info/NewCrisis'
 
 const Dashboard = () => {
 
@@ -32,9 +34,7 @@ const Dashboard = () => {
     }, [user?.id])
 
     useEffect(() => {
-
         if(crises && crises.data.length > 0) {
-
             Fetcher.api('backend')
                 .index('timeline_posts', {
                     user_id: user?.id,
@@ -55,6 +55,9 @@ const Dashboard = () => {
             <Head>
                 <title>Laravel - Dashboard</title>
             </Head>
+
+            <NewCrisis/>
+
             {
                 crises &&
                 <RunCrisis crises={crises}/>

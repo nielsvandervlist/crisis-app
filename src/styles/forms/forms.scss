@@ -58,3 +58,14 @@ label {
         @apply mb-4;
     }
 }
+
+.filter {
+    max-width: 300px;
+    @apply relative;
+    span {
+        position: absolute;
+        right: 20px;
+        top: 50%;
+        transform: translateY(-50%)
+    }
+}
