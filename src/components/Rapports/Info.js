@@ -1,7 +1,3 @@
-import * as helpers from '@/helpers'
-import GetParticipants from '@/components/Participants/GetParticipants'
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-
 function Info({rapport}) {
     return <div className={'rapport-info'}>
         <div className={'rapport-info__head mb-4'}>

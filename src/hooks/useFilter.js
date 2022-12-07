@@ -8,7 +8,7 @@ const Filter = ({value, setValue, className}) => <div className={'filter'}>
         onChange={event => setValue(event.target.value)}
         placeholder={'Search in the list'}
     />
-    <span className={'btn btn--round'}><FontAwesomeIcon icon="search" /></span>
+    <span className={'btn btn--round'}><FontAwesomeIcon icon="search"/></span>
 </div>
 
 export function useFilter(items){

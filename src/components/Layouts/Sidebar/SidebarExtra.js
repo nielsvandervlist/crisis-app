@@ -58,6 +58,9 @@ function SidebarExtra() {
             echo
                 .channel('timeline-channel')
                 .listen('.timeline.post', (data) => {
+
+                    console.log(data)
+
                     setNotifications((oldNotifications) => [...oldNotifications, data])
                     setMessage(data)
                 })

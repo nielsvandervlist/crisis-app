@@ -20,6 +20,7 @@ const Crises = () => {
             Fetcher.api('backend')
                 .index('crises', {
                     user_id: user?.id,
+                    online: 1,
                 })
                 .then((res) => setCrises(res))
         }
