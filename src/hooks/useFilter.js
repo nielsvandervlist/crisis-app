@@ -16,8 +16,39 @@ export function useFilter(items){
     const [value, setValue] = useState('')
     const [sortedItems, setSortedItems] = useState()
 
+    function filterValues(arr, searchKeys) {
+
+        return arr.filter(function(obj) {
+            let match = true;
+
+            // Check if the object has all the search keys
+            for (let key in searchKeys) {
+                if (!obj.hasOwnProperty(key) || obj[key] !== searchKeys[key]) {
+                    match = false;
+                    break;
+                }
+            }
+
+            // Check nested objects
+            if (!match) {
+                for (let nestedKey in obj) {
+                    if (typeof obj[nestedKey] === "object") {
+                        match = filterValues(obj[nestedKey], searchKeys);
+                        if (match) {
+                            break;
+                        }
+                    }
+                }
+            }
+
+            return match;
+        });
+    }
+
     useEffect(() => {
-        setSortedItems(items.filter(item => item.name === value || item.title === value))
+        if(value !== ''){
+            setSortedItems(filterValues(items, {name: value, title: value}))
+        }
     }, [value])
 
     return [

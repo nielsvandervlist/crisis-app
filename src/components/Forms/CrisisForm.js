@@ -2,8 +2,10 @@ import {useAuth} from '@/hooks/auth'
 import {useEffect, useState} from 'react'
 import {Fetcher} from 'ra-fetch'
 import GetParticipants from '@/components/Participants/GetParticipants'
+import FileUpload from '@/components/Forms/FileUpload'
+import MultipleFileUpload from '@/components/Forms/MultipleFileUpload'
 
-function CrisisForm({requestType, crisis, id}) {
+function CrisisForm({requestType, crisis, id, document}) {
 
     const {user} = useAuth({middleware: 'auth'})
 
@@ -14,6 +16,7 @@ function CrisisForm({requestType, crisis, id}) {
     const [response, setResponse] = useState()
     const [errors, setErrors] = useState()
     const [companies, setCompanies] = useState({data: []})
+    const [file, setFile] = useState(document ? document.data[0].url : '')
 
     useEffect(() => {
         Fetcher.api('backend').index('companies')
@@ -22,6 +25,18 @@ function CrisisForm({requestType, crisis, id}) {
             })
             .catch(err => setErrors(err))
     }, [])
+
+    useEffect(() => {
+        if(response){
+            if(file){
+                Fetcher.api('backend').store('documents', {
+                    'crisis_id': response.data.id,
+                    'user_id': user.id,
+                    'url': file,
+                })
+            }
+        }
+    }, [response])
 
     if (!user) {
         return <></>
@@ -41,7 +56,6 @@ function CrisisForm({requestType, crisis, id}) {
 
     function submit(e) {
         e.preventDefault()
-
         if (requestType === 'store') {
             Fetcher.api('backend').store('crises', params)
                 .then(response => setResponse(response))
@@ -96,6 +110,10 @@ function CrisisForm({requestType, crisis, id}) {
             <div className={'form__block'}>
                 <label>Participants</label>
                 {company && <GetParticipants company_id={company.id}/>}
+            </div>
+            <div className={'form__block'}>
+                <label>Files</label>
+                <MultipleFileUpload file={file} setFile={setFile} label={'Submit your files'}/>
             </div>
         </fieldset>
         <div className={'flex items-center'}>

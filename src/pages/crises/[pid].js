@@ -11,8 +11,11 @@ const Crisis = () => {
     const router = useRouter()
     const { pid } = router.query
     const [crisis, setCrisis] = useState()
+    const [document, setDocument] = useState()
 
     const { user } = useAuth({ middleware: 'auth' })
+
+    console.log(document)
 
     useEffect(() => {
         if(user?.id)
@@ -21,6 +24,10 @@ const Crisis = () => {
                     id: pid,
                 })
                 .then(response => setCrisis(response))
+
+            Fetcher.api('backend').index('documents', {
+                'crisis_id': pid,
+            }).then(response => setDocument(response))
 
     }, [user?.id])
 
@@ -36,7 +43,7 @@ const Crisis = () => {
                 <title>Edit Crisis</title>
             </Head>
 
-            {crisis && <CrisisForm requestType={'update'} id={pid} crisis={crisis}/>}
+            {crisis && <CrisisForm requestType={'update'} id={pid} crisis={crisis} document={document}/>}
 
         </AppLayout>
     )

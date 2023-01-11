@@ -2,6 +2,7 @@ import {useEffect, useState} from 'react'
 import {Fetcher, useApi, useIndex} from 'ra-fetch'
 import {useAuth} from '@/hooks/auth'
 import Link from 'next/link'
+import FileUpload from '@/components/Forms/FileUpload'
 
 function PostForm({requestType, id, post}) {
 
@@ -11,7 +12,7 @@ function PostForm({requestType, id, post}) {
     const [description, setDescription] = useState(post ? post.data.description : '')
     const [type, setType] = useState(post ? post.data.post_type_id : '')
     const [online, setOnline] = useState(post ? (!!post.data.online) : false)
-    // const [image, setImage] = useState(post ? post.data.image : '')
+    const [thumbnail, setThumbnail] = useState(post ? post.data.thumbnail : '')
     const [response, setResponse] = useState()
     const [errors, setErrors] = useState()
     const [postTypes, setPostTypes] = useState({data: []})
@@ -32,7 +33,8 @@ function PostForm({requestType, id, post}) {
         description: description,
         post_type_id: type,
         user_id: user.id,
-        online: online ? 1 : 0
+        online: online ? 1 : 0,
+        thumbnail: thumbnail,
     }
 
     if (id) {
@@ -95,6 +97,12 @@ function PostForm({requestType, id, post}) {
                     name={'description'}
                 />
             </div>
+            <FileUpload
+                    file={thumbnail}
+                    setFile={setThumbnail}
+                    label={'Image'}
+                />
+
             {
                 id &&
                 <div className={'form__block'}>

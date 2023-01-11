@@ -42,7 +42,6 @@ const Post = () => {
             <div className={'card col-span-12'}>
                 <Info rapport={rapport}/>
             </div>
-
         </AppLayout>
     )
 }

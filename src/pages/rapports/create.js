@@ -11,13 +11,10 @@ function Create(){
                     Creating Rapports
                 </h2>
             }>
-
             <Head>
                 <title>Laravel - Dashboard</title>
             </Head>
-
             <RapportForm requestType={'store'}/>
-
         </AppLayout>
     )
 }
