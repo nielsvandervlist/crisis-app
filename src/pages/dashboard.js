@@ -33,6 +33,8 @@ const Dashboard = () => {
 
     }, [user?.id])
 
+    console.log(crises)
+
     useEffect(() => {
         if(crises && crises.data.length > 0) {
             Fetcher.api('backend')
@@ -63,7 +65,7 @@ const Dashboard = () => {
                 <RunCrisis crises={crises}/>
             }
             {
-                crises && crises.data.length > 0 && crises.data[0].timeline &&
+                crises && crises.data.length > 0 && crises.data[0].timeline.data &&
                 <div className={'online-timeline col-span-12'}>
                     <Timeline edit={crises.data[0].timeline}/>
                 </div>

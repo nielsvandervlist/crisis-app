@@ -6,6 +6,10 @@ input[type='text'], input[type='date'], input[type='password'], input[type='time
     width: 100%;
 }
 
+select.small {
+    padding: 10px 8px;
+}
+
 input[type='checkbox']{
     display: none;
     & + label {

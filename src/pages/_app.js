@@ -23,6 +23,8 @@ import {
     faHeart,
     faArrowLeft,
     faSearch,
+    faFile,
+    faDownload,
 } from '@fortawesome/free-solid-svg-icons'
 
 import {
@@ -57,6 +59,8 @@ library.add(
     faCircleXmark,
     faArrowLeft,
     faSearch,
+    faFile,
+    faDownload,
 )
 
 const App = ({Component, pageProps}) => <Component {...pageProps} />

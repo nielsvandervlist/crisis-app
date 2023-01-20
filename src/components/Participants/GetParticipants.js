@@ -2,7 +2,7 @@ import {useEffect, useState} from 'react'
 import {useAuth} from '@/hooks/auth'
 import {Fetcher} from 'ra-fetch'
 
-function GetParticipants({company_id}) {
+function GetParticipants({company_id, alignRight}) {
 
     const {user} = useAuth({middleware: 'auth'})
     const [participants, setParticipants] = useState()
@@ -23,7 +23,7 @@ function GetParticipants({company_id}) {
     return <div className={'participants flex'}>
         {
             participants.data.map((partipant, index) => {
-                return <div key={index} className={'participants__block rounded-full h-10 w-10 relative overflow-hidden'}>
+                return <div key={index} className={`participants__block rounded-full h-10 w-10 relative overflow-hidden ${alignRight ? 'flex-row-reverse': ''}`}>
                     <img src={'/images/Portrait_Placeholder.png'} alt={''} title={partipant.name}/>
                 </div>
             })

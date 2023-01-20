@@ -1,5 +1,6 @@
 .file-upload {
-    @apply flex mb-8 relative;
+    @apply flex mb-8 relative flex-col flex-1 items-start;
+    max-width: 500px;
     &__input {
         margin-right: 20px;
         label {

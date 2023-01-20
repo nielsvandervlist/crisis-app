@@ -5,6 +5,7 @@ import {useAuth} from '@/hooks/auth'
 import AppLayout from '@/components/Layouts/AppLayout'
 import Head from 'next/head'
 import CrisisForm from '@/components/Forms/CrisisForm'
+import ControlActiveCrisis from '@/components/Crisis/ControlActiveCrisis'
 
 const Crisis = () => {
 
@@ -21,8 +22,7 @@ const Crisis = () => {
                     .show('crises', {
                         id: pid,
                         company: true,
-                    })
-                    .then(response => setCrisis(response))
+                    }).then(response => setCrisis(response))
 
             Fetcher.api('backend').index('documents', {
                 'crisis_id': pid,
@@ -35,6 +35,8 @@ const Crisis = () => {
         }, [user?.id],
     )
 
+    console.log(crisis)
+
     return (
         <AppLayout
             header={
@@ -44,10 +46,10 @@ const Crisis = () => {
             }>
 
             <Head>
-                <title>Edit Crisis</title>
+                <title>Online Crisis</title>
             </Head>
 
-            {crisis && <CrisisForm requestType={'update'} id={pid} crisis={crisis} documents={documents}/>}
+            {crisis && <ControlActiveCrisis crisis={crisis.data} documents={documents}/>}
 
         </AppLayout>
     )

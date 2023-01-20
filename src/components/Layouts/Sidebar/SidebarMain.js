@@ -46,6 +46,11 @@ function SidebarMain({user}){
                             <a><FontAwesomeIcon icon="clock"/>Rapports</a>
                         </Link>
                     </li>
+                    <li className={router.pathname.includes("/documents")  ? "active" : ""}>
+                        <Link href={'/documents'}>
+                            <a><FontAwesomeIcon icon="file"/>Documents</a>
+                        </Link>
+                    </li>
                 </ul>
             }
         </nav>

@@ -26,6 +26,12 @@
         @apply bg-danger;
     }
 
+    &--form-error {
+        @apply bg-white text-xs;
+        border: 2px solid #FF3E1D;
+        color: #FF3E1D;
+    }
+
     &--label {
         padding: 5px 10px;
         font-size: 11px;

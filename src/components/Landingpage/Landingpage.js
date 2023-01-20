@@ -5,7 +5,7 @@ const LandingPage = () => {
     return (
         <div className="bg-white h-screen flex flex-col">
             <header className="bg-primary p-4 flex justify-between items-center">
-                <div className="text-xl font-bold text-white">[Company Name]</div>
+                <div className="text-xl font-bold text-warning">Canary</div>
                 <div className="flex">
                     <Link href="/login" as="/login">
                         <a className="px-4 py-2 bg-white hover:bg-gray-100 text-primary font-bold rounded-full">Login</a>
@@ -16,6 +16,9 @@ const LandingPage = () => {
                 </div>
             </header>
             <main className="flex-1 flex flex-col justify-center items-center">
+                <div className={'col-span-6'}>
+                    <img src={'/images/bird.png'} className={'w-full'} alt={''}/>
+                </div>
                 <div className="container mx-auto max-w-1440 grid gap-4">
                     <div className={'col-span-12 px-8'}>
                         <div className="text-4xl font-bold text-primary mb-6">Welcome to [Company Name]</div>
