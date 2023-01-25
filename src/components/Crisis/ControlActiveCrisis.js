@@ -7,6 +7,7 @@ import MultipleFileUpload from '@/components/Forms/MultipleFileUpload'
 import Timeline from '@/components/Timeline/Timeline'
 import DragAndDrop from '@/components/Forms/DragDrop'
 import FileDrop from '@/components/Rounds/FileDrop'
+import Participants from '@/pages/participants'
 
 function ControlActiveCrisis({crisis, documents}) {
 
@@ -42,10 +43,19 @@ function ControlActiveCrisis({crisis, documents}) {
             {documents && <div className={'documents'}>
                 <div className={'documents__heading mb-4'}>
                     <h3>Documents</h3>
-                    <p>Choose in which round the documents are shown to the participants, or at the start</p>
+                    <p>Choose in which round the documents are shown to the participants.</p>
+                    <p>You can drag files from one box the the other.</p>
                 </div>
                 {documents && <FileDrop documents={documents} />}
             </div>}
+        </div>
+
+        <div className={'card col-span-12'}>
+            <h3>Participants</h3>
+            <p className={'mb-4'}>You can see all participants here</p>
+            <div className={'border rounded-md border-gray-100 p-4 flex-1 relative'}>
+                <GetParticipants company_id={crisis.company_id}/>
+            </div>
         </div>
     </>
 }

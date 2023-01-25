@@ -8,6 +8,7 @@ function FileDrop({documents, id}){
     const {user} = useAuth({middleware: 'auth'})
     const [rounds, setRounds] = useState()
 
+    //TODO Rounds is not yet used
     useEffect(() => {
             if (user?.id)
                 Fetcher.api('backend')
@@ -16,8 +17,6 @@ function FileDrop({documents, id}){
                     }).then(response => setRounds(response))
         }, [user?.id],
     )
-
-    console.log(rounds)
 
     return <div>
         {rounds && <DragAndDrop data={documents.data} rounds={rounds}/>}

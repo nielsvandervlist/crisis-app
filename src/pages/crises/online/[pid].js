@@ -35,8 +35,6 @@ const Crisis = () => {
         }, [user?.id],
     )
 
-    console.log(crisis)
-
     return (
         <AppLayout
             header={
