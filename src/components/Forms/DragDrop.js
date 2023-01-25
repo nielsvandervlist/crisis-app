@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 
-function DragAndDrop({data}) {
+function DragAndDrop({data, rounds}) {
     const [items, setItems] = useState(data)
     const [draggedItem, setDraggedItem] = useState(null)
     const [droppedItems, setDroppedItems] = useState([])
@@ -34,7 +34,7 @@ function DragAndDrop({data}) {
     }
 
     return (
-        <div>
+        <div className={'flex'}>
             <div
                 onDragOver={handleDragOver}
                 onDrop={handleDropBack}
@@ -56,27 +56,35 @@ function DragAndDrop({data}) {
                     <p>No more items to drag</p>
                 )}
             </div>
-            <div
-                onDragOver={handleDragOver}
-                onDrop={handleDrop}
-                className={'border rounded-md border-gray-100 px-4 py-4'}
-            >
-                {droppedItems.length > 0 ? (
-                    <ul>
-                        {droppedItems.map((item, index) => (
-                            <li
-                                key={index}
-                                draggable
-                                onDragStart={e => handleDragStart(e, item)}
-                            >
-                                {item.name}
-                            </li>
-                        ))}
-                    </ul>
-                ) : (
-                    <p>Drop Here</p>
-                )}
-            </div>
+            {
+                rounds.data.map((round, index) => {
+                    return <>
+                        <div className={''}>Roun</div>
+                        <div
+                            key={index}
+                            onDragOver={handleDragOver}
+                            onDrop={handleDrop}
+                            className={'border rounded-md border-gray-100 px-4 py-4 flex-1'}
+                        >
+                            {droppedItems.length > 0 ? (
+                                <ul>
+                                    {droppedItems.map((item, index) => (
+                                        <li
+                                            key={index}
+                                            draggable
+                                            onDragStart={e => handleDragStart(e, item)}
+                                        >
+                                            {item.name}
+                                        </li>
+                                    ))}
+                                </ul>
+                            ) : (
+                                <p>Drop Here</p>
+                            )}
+                        </div>
+                    </>
+                })
+            }
         </div>
     )
 }

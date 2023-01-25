@@ -15,7 +15,7 @@ function ControlActiveCrisis({crisis, documents}) {
     const [response, setResponse] = useState()
     const [errors, setErrors] = useState()
 
-    function setRoundOfDocument(id, value){
+    function setRoundOfDocument(id, value) {
         setDocument(value)
 
         Fetcher.api('backend').update('documents', {
@@ -26,49 +26,28 @@ function ControlActiveCrisis({crisis, documents}) {
             .catch(errors => setErrors(errors))
     }
 
-    return <div className={'card col-span-12'}>
-        <div className={'active-crisis mb-8'}>
-            <div className={'active-crisis__heading mb-4'}>
-                <h1 className={'mb-2'}>{crisis.title}</h1>
-                <p className={'font-bold'}>Description:</p>
-                <p className={'mb-2'}>{crisis.description}</p>
-                <p className={'font-bold'}>Company:</p>
-                <p>{crisis.company.name}</p>
+    return <>
+        <div className={'card col-span-12'}>
+            <div className={'active-crisis'}>
+                <div className={'active-crisis__heading mb-4'}>
+                    <h1 className={'mb-2'}>{crisis.title}</h1>
+                    <p className={'font-bold'}>Description:</p>
+                    <p className={'mb-2'}>{crisis.description}</p>
+                    <p className={'font-bold'}>Company:</p>
+                    <p>{crisis.company.name}</p>
+                </div>
             </div>
-
+        </div>
+        <div className={'card col-span-12'}>
             {documents && <div className={'documents'}>
                 <div className={'documents__heading mb-4'}>
                     <h3>Documents</h3>
                     <p>Choose in which round the documents are shown to the participants, or at the start</p>
                 </div>
-                {
-                    documents.data.map((doc, index) => {
-                        return <div
-                            className={'documents__item py-4 rounded-md border border-gray-100 px-4 flex items-center'}
-                            key={index}
-                        >
-                            <p>{doc.name}</p>
-                            {/*<select*/}
-                            {/*    className={'max-w-[120px] ml-auto small'}*/}
-                            {/*>*/}
-                            {/*    <option>Participant 1</option>*/}
-                            {/*</select>*/}
-                            {/*<select*/}
-                            {/*    value={document}*/}
-                            {/*    className={'max-w-[100px] ml-auto small'}*/}
-                            {/*    onChange={event => setRoundOfDocument(doc.id, event.target.value)}*/}
-                            {/*>*/}
-                            {/*    <option>Default</option>*/}
-                            {/*    <option>Round 1</option>*/}
-                            {/*</select>*/}
-                        </div>
-                    })
-                }
+                {documents && <FileDrop documents={documents} />}
             </div>}
         </div>
-
-        {documents && <FileDrop documents={documents} />}
-    </div>
+    </>
 }
 
 export default ControlActiveCrisis

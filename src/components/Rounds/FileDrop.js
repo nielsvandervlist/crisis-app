@@ -6,19 +6,21 @@ import DragAndDrop from '@/components/Forms/DragDrop'
 function FileDrop({documents, id}){
 
     const {user} = useAuth({middleware: 'auth'})
-    const [rounds, setRounds] = useState([])
+    const [rounds, setRounds] = useState()
 
     useEffect(() => {
             if (user?.id)
                 Fetcher.api('backend')
-                    .show('rounds', {
+                    .index('rounds', {
                         crisis_id: id,
                     }).then(response => setRounds(response))
         }, [user?.id],
     )
 
+    console.log(rounds)
+
     return <div>
-        <DragAndDrop data={documents.data}/>
+        {rounds && <DragAndDrop data={documents.data} rounds={rounds}/>}
     </div>
 }
 
