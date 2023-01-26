@@ -6,6 +6,7 @@ import TimelinePostForm from '@/components/Forms/TimelinePostForm'
 function EditBox({post, setOpen, open, setEdit}) {
 
     useEffect(() => {
+        if(open)
         setEdit(post.post_id)
     }, [])
 

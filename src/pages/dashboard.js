@@ -10,12 +10,14 @@ import Modal from '@/components/Modal/Modal'
 import PostWrapper from '@/components/PostTypes/PostWrapper'
 import Link from 'next/link'
 import NewCrisis from '@/components/Info/NewCrisis'
+import OnlineCrisis from '@/components/Crisis/OnlineCrisis'
 
 const Dashboard = () => {
 
     const {user} = useAuth({middleware: 'auth'})
     const [crises, setCrises] = useState()
     const [reaction, setReaction] = useState()
+    const [activeCrisis, setActiveCrisis] = useState()
     const [timelinePosts, setTimelinePosts] = useState()
     const [open, setOpen] = useState(false)
 
@@ -32,8 +34,6 @@ const Dashboard = () => {
         }
 
     }, [user?.id])
-
-    console.log(crises)
 
     useEffect(() => {
         if(crises && crises.data.length > 0) {
@@ -58,11 +58,11 @@ const Dashboard = () => {
                 <title>Laravel - Dashboard</title>
             </Head>
 
-            <NewCrisis/>
+            {/*<NewCrisis/>*/}
 
             {
                 crises &&
-                <RunCrisis crises={crises}/>
+                <OnlineCrisis crises={crises} activeCrisis={activeCrisis} setActiveCrisis={setActiveCrisis}/>
             }
             {
                 crises && crises.data.length > 0 && crises.data[0].timeline.data &&

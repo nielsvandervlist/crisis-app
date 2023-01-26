@@ -15,7 +15,7 @@ function OnlineCrisis({crises, activeCrisis}) {
         }
     }, [activeCrisis])
 
-    return <div className={'col-span-4 mb-2 card flex flex-col'}>
+    return <div className={'col-span-4 card flex flex-col'}>
         <h3 className={'mb-4'}>Online crises</h3>
         <p className={'mb-4'}>Here is a list of all the active crises</p>
         {

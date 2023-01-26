@@ -14,7 +14,7 @@ function StartCrisis({crises, setActiveCrisis}){
         }).then(res => setActiveCrisis(res)).catch(err => console.log(err))
     }
 
-    return <div className={'card col-span-4 mb-2 flex flex-col'}>
+    return <div className={'card col-span-4 flex flex-col'}>
         <h3 className={'mb-4'}>Select a crisis to start and run the timeline</h3>
         {
             crises.data.length > 0 ?

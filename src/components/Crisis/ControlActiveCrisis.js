@@ -28,7 +28,7 @@ function ControlActiveCrisis({crisis, documents}) {
     }
 
     return <>
-        <div className={'card col-span-12'}>
+        <div className={'card col-span-6'}>
             <div className={'active-crisis'}>
                 <div className={'active-crisis__heading mb-4'}>
                     <h1 className={'mb-2'}>{crisis.title}</h1>

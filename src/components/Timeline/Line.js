@@ -20,14 +20,11 @@ function Line({setOpen, open, duration, timelinePosts, edit, setEdit}) {
         timelinePosts.data.forEach((post) => {
 
             const minute = post.time
-
             const width = document.querySelector('#line').offsetWidth
-
             const postMinute = (width / minutes) * minute
 
             placement.push({
                 post_id: post.id,
-                title: post.title,
                 pixels: Math.round(postMinute),
             })
         })
@@ -45,12 +42,16 @@ function Line({setOpen, open, duration, timelinePosts, edit, setEdit}) {
         })
     }, [duration, timelinePosts])
 
+    function editPost(id){
+        setEdit(id)
+    }
+
     return <div className={'timeline__line'}>
         <div className={'timeline-posts__wrapper'}>
             <div className={'timeline-posts__edit-wrapper relative'}>
                 {
                     line.posts.map((post, index) => {
-                        return <div className={'absolute'} onClick={() => setEdit(post.post_id)} key={index} style={{left: post.pixels}}>
+                        return <div className={'absolute'} onClick={() => editPost(post.post_id)} key={index} style={{left: post.pixels}}>
                             <EditBox
                                 setOpen={setOpen}
                                 open={open}

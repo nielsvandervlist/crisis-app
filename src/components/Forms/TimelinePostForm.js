@@ -17,8 +17,9 @@ function TimelinePostForm({timelineId, posts, timelinePosts, setTimelinePosts, s
         setOpen(false)
     }
 
-    function removeTimelinePost(response) {
-        //
+    function removeTimelinePost(response, edit) {
+        const filter = timelinePosts.data.filter((item) => item.id !== edit)
+        setTimelinePosts({data: filter})
     }
 
     useEffect(() => {
@@ -43,8 +44,10 @@ function TimelinePostForm({timelineId, posts, timelinePosts, setTimelinePosts, s
     function remove(e) {
         e.preventDefault()
         Fetcher.api('backend').delete('timeline_posts', {id: edit})
-            .then(response => removeTimelinePost(response.data))
+            .then(response => removeTimelinePost(response.data, edit))
             .catch(errors => setErrors(errors))
+
+        setOpen(false)
     }
 
     function submit(e) {
