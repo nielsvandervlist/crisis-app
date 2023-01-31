@@ -4,7 +4,7 @@ import TimelineForm from '@/components/Forms/TimelineForm'
 import TimelinePosts from '@/components/Forms/TimelinePosts'
 import {useRouter} from 'next/router'
 
-function Timeline({edit}) {
+function Timeline({edit, form}) {
 
     const [title, setTitle] = useState('')
     const [duration, setDuration] = useState('')
@@ -25,8 +25,7 @@ function Timeline({edit}) {
     }, [])
 
     return <>
-        {
-            router.pathname === ('/timelines/create' || `'timelines/${timeline.id}`) &&
+        {form &&
             <TimelineForm
                 setTimeline={setTimeline}
                 title={title}

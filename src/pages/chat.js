@@ -6,52 +6,29 @@ import Head from 'next/head'
 import Messagebox from '@/components/Chat/MessageBox'
 import AppLayout from '@/components/Layouts/AppLayout'
 import {useAuth} from '@/hooks/auth'
+import {Fetcher} from 'ra-fetch'
+import Link from 'next/link'
 
 function Chat() {
 
     const {user} = useAuth({middleware: 'auth'})
-    const [message, setMessage] = useState('')
-    const [messages, setMessages] = useState([])
+    const [rooms, setRooms] = useState()
+    const [participants, setParticipants] = useState()
 
     useEffect(() => {
-        const echo = new Echo({
-            broadcaster: 'pusher',
-            key: process.env.NEXT_PUBLIC_MIX_ABLY_PUBLIC_KEY,
-            wsHost: 'realtime-pusher.ably.io',
-            wsPort: 443,
-            disableStats: true,
-            encrypted: true,
-        })
+        if (user?.id) {
+            Fetcher.api('backend').index('chat_rooms', {
+                user_id: user?.id,
+            }).then(res => setRooms(res))
 
-        echo
-            .channel('public.room')
-            .subscribed(() => {
-                console.log('You are subscribed')
-            })
-            .listen('.message.new', (data) => {
-                setMessages((oldMessages) => [...oldMessages, data])
-                setMessage('')
-            })
-    }, [])
+            Fetcher.api('backend').index('participants', {
+                user_id: user?.id,
+            }).then(res => setParticipants(res))
+        }
+    }, [user?.id])
 
-    async function handleSendMessage(e) {
-        e.preventDefault()
-        if (!user) {
-            alert('Please add your username')
-            return
-        }
-        if (!message) {
-            alert('Please add a message')
-            return
-        }
-        try {
-            await axios.post(`/api/messages`, {
-                user: user.name,
-                message: message,
-            })
-        } catch (error) {
-            console.error(error)
-        }
+    if (!participants) {
+        return <></>
     }
 
     return (
@@ -68,33 +45,28 @@ function Chat() {
             <div className={'col-span-12 chat card'}>
                 <div className={'chat__wrapper grid-cols-12 grid-rows-6 grid gap-4'}>
                     <div className={'chat__channels col-span-4 row-span-6'}>
+                        <h3 className={'mb-4'}>General</h3>
+                        <div className={'chat__participant flex items-center'}>
+                            General chat room
+                        </div>
 
-                    </div>
-                    <div className={'chat__active col-span-8 row-span-6'}>
-                        <div className={'chat__header mb-4'}>
-                            <h1>Public Space</h1>
-                            <p>Post your random thoughts for the world to see</p>
-                        </div>
-                        <div className={'chat__messages mb-4'}>
-                            {messages.map((message) => (
-                                <Messagebox key={message.id} message={message} user={user}/>
-                            ))}
-                        </div>
-                        <div className={'chat__form'}>
-                            <form onSubmit={(e) => handleSendMessage(e)}>
-                                <div>
-                                    <input
-                                        type="text"
-                                        placeholder="Type your message..."
-                                        value={message}
-                                        className={'mb-4'}
-                                        onChange={(e) => setMessage(e.target.value)}
-                                        required
-                                    />
-                                    <button className={'btn btn--primary'} onClick={(e) => handleSendMessage(e)}>Send</button>
-                                </div>
-                            </form>
-                        </div>
+                        <h3 className={'mb-4'}>Participants</h3>
+                        {
+                            participants.data.map((participant, index) => {
+
+
+
+                                return <Link href={`/rooms/${participant.id}`}>
+                                    <a
+                                        className={'chat__participant flex items-center'}
+                                        key={index}
+                                    >
+                                        <span className={'w-2 h-2 rounded-full bg-success inline-block mr-2'}/>
+                                        {participant.name}
+                                    </a>
+                                </Link>
+                            })
+                        }
                     </div>
                 </div>
             </div>

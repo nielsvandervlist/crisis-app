@@ -33,6 +33,11 @@ const Crises = () => {
             <Head>
                 <title>Laravel - Dashboard</title>
             </Head>
+
+            <div className={'flex w-full col-span-12 mb-2'}>
+                <button className={'btn btn--primary'}><Link href={`documents/create`}><a>Create document</a></Link></button>
+            </div>
+
             {documents && <DownloadList items={documents} setItems={setDocuments} type={'documents'}/>}
 
         </AppLayout>

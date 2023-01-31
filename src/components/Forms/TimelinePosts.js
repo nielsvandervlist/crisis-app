@@ -16,8 +16,6 @@ function TimelinePosts({duration, title, timeline}) {
     const [timelinePosts, setTimelinePosts] = useState([])
     const [edit, setEdit] = useState()
 
-    console.log(timelinePosts)
-
     useEffect(() => {
         if (user?.id) {
             Fetcher.api('backend').index('posts', {

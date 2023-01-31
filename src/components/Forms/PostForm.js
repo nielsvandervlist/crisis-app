@@ -100,7 +100,7 @@ function PostForm({requestType, id, post}) {
             <FileUpload
                     file={thumbnail}
                     setFile={setThumbnail}
-                    label={'Image'}
+                    label={'Add image to post'}
                 />
 
             {

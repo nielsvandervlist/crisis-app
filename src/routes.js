@@ -77,5 +77,8 @@ const backend = Router.api('backend', `${process.env.NEXT_PUBLIC_BACKEND_URL}`)
 
     .store('messages', '/api/messages')
 
+    .index('chat_rooms', '/api/chat_rooms')
+    .show('chat_rooms', '/api/chat_rooms/{chatRoom}/join')
+
 
 

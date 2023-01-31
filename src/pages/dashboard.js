@@ -4,13 +4,13 @@ import {useAuth} from '@/hooks/auth'
 import {Fetcher} from 'ra-fetch'
 import {useEffect, useState} from 'react'
 import Timeline from '@/components/Timeline/Timeline'
-import RunCrisis from '@/components/Crisis/RunCrisis'
 import ReactionForm from '@/components/Forms/ReactionForm'
 import Modal from '@/components/Modal/Modal'
-import PostWrapper from '@/components/PostTypes/PostWrapper'
-import Link from 'next/link'
-import NewCrisis from '@/components/Info/NewCrisis'
 import OnlineCrisis from '@/components/Crisis/OnlineCrisis'
+import TimelinePostsList from '@/components/Lists/TimelinePostsList'
+import PinterestLayout from '@/components/PostTypes/PinterestLayout'
+import Item from '@/components/PostTypes/Item'
+import Facebook from '@/components/PostTypes/Facebook'
 
 const Dashboard = () => {
 
@@ -67,19 +67,31 @@ const Dashboard = () => {
             {
                 crises && crises.data.length > 0 && crises.data[0].timeline.data &&
                 <div className={'online-timeline col-span-12'}>
-                    <Timeline edit={crises.data[0].timeline}/>
+                    <Timeline form={false} edit={crises.data[0].timeline}/>
                 </div>
             }
+
             {
-                timelinePosts &&
-                <div className={'social-posts col-span-12'}>
-                    {
-                        timelinePosts.data.map((timelinePost, index) => {
-                            return <div key={index}><PostWrapper post={timelinePost.post} setOpen={setOpen}/></div>
-                        })
-                    }
-                </div>
+                crises &&
+                <TimelinePostsList crisis={crises.data[0].id} user={user}/>
             }
+
+            {/*{*/}
+            {/*    timelinePosts &&*/}
+            {/*    <div className={'social-posts col-span-12'}>*/}
+            {/*        {*/}
+            {/*            timelinePosts.data.map((timelinePost, index) => {*/}
+            {/*                return <div key={index}><PostWrapper post={timelinePost.post} setOpen={setOpen}/></div>*/}
+            {/*            })*/}
+            {/*        }*/}
+            {/*    </div>*/}
+            {/*}*/}
+
+            <PinterestLayout>
+                <Item>
+                    <Facebook/>
+                </Item>
+            </PinterestLayout>
 
 
             <Modal open={open} setOpen={setOpen}>

@@ -11,12 +11,12 @@ function FileUpload({file, setFile, label}){
     }, [file])
 
     return <div className={`file-upload ${preview ? 'file-upload--preview' : ''}`}>
-        <div className={'file-upload__input'}>
-            <label className={'btn btn--primary'} htmlFor={'file'}>{!preview ? label : 'Change file'}</label>
+        <div className={'file-upload__input w-full'}>
+            <label className={'btn btn--primary text-center'} htmlFor={'file'}>{!preview ? label : 'Change file'}</label>
             <input id={'file'} name={'file'} type={'file'} onChange={event => setFile(event.target.files[0])} />
         </div>
             <div className={'file-upload__preview'}>
-                <img src={preview} alt={'preview'}/>
+                {preview && <img src={preview} alt={'preview'}/>}
             </div>
     </div>
 }

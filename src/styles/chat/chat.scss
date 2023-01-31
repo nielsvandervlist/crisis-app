@@ -9,6 +9,10 @@
         flex: 0 1 auto;
     }
 
+    &__participant {
+        @apply border border-gray-100 p-4 rounded-md mb-4 mr-8;
+    }
+
     &__channels {
         border-right: 1px solid #696CFF;
     }

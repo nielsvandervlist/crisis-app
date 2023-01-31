@@ -47,10 +47,6 @@ function Create() {
             </div>
 
             <PostForm requestType={'store'}/>
-            <div className={'col-span-6 card preview'}>
-                <h3 className={'mb-4'}>Preview of the post</h3>
-                <Twitter/>
-            </div>
 
         </AppLayout>
     )

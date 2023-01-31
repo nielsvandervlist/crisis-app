@@ -31,7 +31,7 @@ const Create = () => {
                 <p>Dont worry you can also show posts while the crisis is running without using a timeline!</p>
             </div>
 
-            <Timeline/>
+            <Timeline form={true}/>
 
         </AppLayout>
     )

@@ -1,6 +1,7 @@
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 
 function Facebook({social}){
+
     return <div className={'facebook'}>
         <div className={'facebook__header'}>
             <div className={'flex'}>
