@@ -9,6 +9,7 @@ const backend = Router.api('backend', `${process.env.NEXT_PUBLIC_BACKEND_URL}`)
 
     .index('users', '/api/users')
     .show('user', '/api/user')
+    .update('user', '/api/user')
 
     .index('posts', '/api/posts')
     .show('posts', '/api/posts/{id}')
@@ -37,7 +38,9 @@ const backend = Router.api('backend', `${process.env.NEXT_PUBLIC_BACKEND_URL}`)
 
     .index('timelines', '/api/timelines')
     .show('timelines', '/api/timelines/{id}')
+    .show('timelines', '/api/timelines/{id}/run')
     .store('timelines', '/api/timelines', {form_data: true})
+    .update('timelines', '/api/timelines/{id}', {form_data: true})
     .delete('timelines', '/api/timelines/{id}')
 
     .index('participants', '/api/participants')
@@ -75,6 +78,7 @@ const backend = Router.api('backend', `${process.env.NEXT_PUBLIC_BACKEND_URL}`)
     .update('documents', '/api/documents/{id}', {form_data: true})
     .delete('documents', '/api/documents/{id}')
 
+    .show('messages', '/api/messages/{id}')
     .store('messages', '/api/messages')
 
     .index('chat_rooms', '/api/chat_rooms')

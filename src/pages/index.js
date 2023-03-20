@@ -1,5 +1,4 @@
 import Head from 'next/head'
-import Link from 'next/link'
 import { useAuth } from '@/hooks/auth'
 import LandingPage from '@/components/Landingpage/Landingpage'
 
@@ -11,7 +10,6 @@ export default function Home() {
             <Head>
                 <title>Laravel</title>
             </Head>
-
             <LandingPage/>
         </>
     )

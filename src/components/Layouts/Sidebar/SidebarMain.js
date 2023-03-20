@@ -9,7 +9,7 @@ function SidebarMain({user}){
     return <div className={'sidebar__main'}>
         <nav>
             {
-                (user?.role[0] === 'admin' || user?.role[0] === 'editor') &&
+                (user?.roles[0].name === 'admin' || user?.roles[0].name === 'editor') &&
                 <ul>
                     <li className={router.pathname.includes("/dashboard")  ? "active" : ""}>
                         <Link href={'/dashboard'}>
@@ -43,7 +43,7 @@ function SidebarMain({user}){
                     </li>
                     <li className={router.pathname.includes("/rapports")  ? "active" : ""}>
                         <Link href={'/rapports'}>
-                            <a><FontAwesomeIcon icon="clock"/>Rapports</a>
+                            <a><FontAwesomeIcon icon="clock"/>Reports</a>
                         </Link>
                     </li>
                     <li className={router.pathname.includes("/documents")  ? "active" : ""}>
@@ -52,6 +52,17 @@ function SidebarMain({user}){
                         </Link>
                     </li>
                 </ul>
+            }
+
+            {
+                user?.roles[0].name === 'participant' &&
+                    <ul>
+                        <li>
+                            <Link href={'/participant-dashboard'}>
+                                <a><FontAwesomeIcon icon="circle-dot"/>Overview</a>
+                            </Link>
+                        </li>
+                    </ul>
             }
         </nav>
     </div>

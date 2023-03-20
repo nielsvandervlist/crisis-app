@@ -71,10 +71,10 @@ const Dashboard = () => {
                 </div>
             }
 
-            {
-                crises &&
-                <TimelinePostsList crisis={crises.data[0].id} user={user}/>
-            }
+            {/*{*/}
+            {/*    crises &&*/}
+            {/*    <TimelinePostsList crisis={crises.data[0].id} user={user}/>*/}
+            {/*}*/}
 
             {/*{*/}
             {/*    timelinePosts &&*/}

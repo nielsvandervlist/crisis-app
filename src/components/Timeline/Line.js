@@ -1,7 +1,10 @@
 import {useEffect, useRef, useState} from 'react'
 import EditBox from '@/components/Timeline/EditBox'
+import {Fetcher} from 'ra-fetch'
 
-function Line({setOpen, open, duration, timelinePosts, edit, setEdit}) {
+function Line({setOpen, open, duration, timelinePosts, edit, setEdit, timeline}) {
+
+    const [done, setDone] = useState()
 
     const [line, setLine] = useState({
         blocks: [],
@@ -42,7 +45,27 @@ function Line({setOpen, open, duration, timelinePosts, edit, setEdit}) {
         })
     }, [duration, timelinePosts])
 
-    function editPost(id){
+    function createLine(time){
+        const width = document.querySelector('#line').offsetWidth
+        const duration = timeline.data.duration * 60
+        const passedTime = time / 60
+        const progress = (passedTime % duration / duration) * 100;
+        setDone(width / 100 * progress)
+    }
+
+    useEffect(() => {
+        if (timeline.data.online) {
+            const interval = setInterval(() => {
+                Fetcher.api('backend').show('timelines', {
+                    id: timeline.data.id,
+                }).then(res => createLine(res.data.time))
+            }, 60 * 1000)
+
+            return () => clearInterval(interval);
+        }
+    }, [timeline.data])
+
+    function editPost(id) {
         setEdit(id)
     }
 
@@ -51,7 +74,8 @@ function Line({setOpen, open, duration, timelinePosts, edit, setEdit}) {
             <div className={'timeline-posts__edit-wrapper relative'}>
                 {
                     line.posts.map((post, index) => {
-                        return <div className={'absolute'} onClick={() => editPost(post.post_id)} key={index} style={{left: post.pixels}}>
+                        return <div className={'absolute'} onClick={() => editPost(post.post_id)} key={index}
+                                    style={{left: post.pixels}}>
                             <EditBox
                                 setOpen={setOpen}
                                 open={open}
@@ -64,9 +88,12 @@ function Line({setOpen, open, duration, timelinePosts, edit, setEdit}) {
                     })
                 }
             </div>
-            <div className={'timeline-posts__line cursor-pointer'} onClick={() => setOpen(true) && setEdit(false) && console.log('open')}>
+            <div className={'timeline-posts__line cursor-pointer'}
+                 onClick={() => setOpen(true) && setEdit(false) && console.log('open')}>
                 <div className={'timeline-posts-post timeline-posts-post__add'}/>
-                <div className={'timeline-posts-done'}/>
+                <div className={'timeline-posts-done'}
+                    style={{width: `${done}px`}}
+                />
             </div>
             <div className={'timeline-posts-time flex justify-between'}>
                 {

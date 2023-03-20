@@ -8,7 +8,7 @@ import GetParticipants from '@/components/Participants/GetParticipants'
 import TimelinePostsHeader from '@/components/Timeline/TimelinePostsHeader'
 import TimelinePostsFooter from '@/components/Timeline/TimelinePostsFooter'
 
-function TimelinePosts({duration, title, timeline}) {
+function TimelinePosts({duration, title, timeline, setTimeline, participant}) {
 
     const {user} = useAuth({middleware: 'auth'})
     const [open, setOpen] = useState(false)
@@ -56,7 +56,7 @@ function TimelinePosts({duration, title, timeline}) {
             setEdit={setEdit}
         />
 
-        <TimelinePostsFooter company_id={timeline.data.company_id}/>
+        <TimelinePostsFooter timeline={timeline} setTimeline={setTimeline} company_id={timeline.data.company_id}/>
 
         <Modal title={'Add posts to timeline'} open={open} setOpen={setOpen}>
             <TimelinePostForm

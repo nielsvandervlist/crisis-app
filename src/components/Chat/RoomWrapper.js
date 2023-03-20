@@ -4,32 +4,40 @@ import axios from '@/lib/axios'
 import Messagebox from '@/components/Chat/MessageBox'
 import {Fetcher} from 'ra-fetch'
 
-export default function RoomWrapper({user, chatRoomId}){
+export default function RoomWrapper({user, chatRoomId}) {
 
     const [message, setMessage] = useState('')
-    const [messages, setMessages] = useState([])
-    const [subscribed, setSubscribed] = useState(false);
+    const [messages, setMessages] = useState()
+    const [subscribed, setSubscribed] = useState(false)
+    const [first, setFirst] = useState(false)
+
+    console.log(messages)
 
     useEffect(() => {
-        if(user?.id){
+        if (user?.id && !first) {
             Fetcher.api('backend').show('chat_rooms', {
                 'chatRoom': chatRoomId,
             })
+
+            Fetcher.api('backend').show('messages', {
+                id: chatRoomId,
+            }).then(res => setMessages(res.data))
+
+            setFirst(true)
         }
     }, [user?.id])
 
     useEffect(() => {
         if (!subscribed) {
-
             const echo = new Echo({
                 broadcaster: 'pusher',
                 key: 'ec406300773b41b56bc0',
                 cluster: 'eu',
                 wsPort: 443,
-                forceTLS: true
+                forceTLS: true,
             })
 
-            let channelName = 'chat-room.' + chatRoomId + '.' + user.id;
+            let channelName = 'chat-room.' + chatRoomId + '.' + user.id
 
             echo
                 .channel(channelName)
@@ -37,7 +45,7 @@ export default function RoomWrapper({user, chatRoomId}){
                     console.log('You are subscribed')
                 })
                 .listen('.message.new', (data) => {
-                    setMessages((oldMessages) => [...oldMessages, data])
+                    setMessages((oldMessages) => [...oldMessages, data.message])
                     setMessage('')
                 })
 
@@ -70,11 +78,14 @@ export default function RoomWrapper({user, chatRoomId}){
         <div className={'chat__header mb-4'}>
             {/*<h1>{channelName}</h1>*/}
         </div>
-        <div className={'chat__messages mb-4'}>
-            {messages.map((message, index) => (
-                <Messagebox key={index} message={message} user={user}/>
-            ))}
-        </div>
+        {
+            messages &&
+            <div className={'chat__messages mb-4'}>
+                {messages.map((message, index) => (
+                    <Messagebox key={index} message={message} user={user}/>
+                ))}
+            </div>
+        }
         <div className={'chat__form'}>
             <form onSubmit={(e) => handleSendMessage(e)}>
                 <div>

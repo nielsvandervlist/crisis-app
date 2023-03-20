@@ -2,7 +2,7 @@ import {useEffect, useState} from 'react'
 import {useAuth} from '@/hooks/auth'
 import {Fetcher} from 'ra-fetch'
 
-function GetParticipants({company_id, alignRight, info}) {
+function GetParticipants({company_id, alignRight, info, participant}) {
 
     const {user} = useAuth({middleware: 'auth'})
     const [participants, setParticipants] = useState()
@@ -10,7 +10,7 @@ function GetParticipants({company_id, alignRight, info}) {
     useEffect(() => {
         if (user?.id) {
             Fetcher.api('backend').index('participants', {
-                user_id: user?.id,
+                user_id: participant ? participant.user_id : user?.id,
                 company_id: company_id,
             }).then(res => setParticipants(res))
         }

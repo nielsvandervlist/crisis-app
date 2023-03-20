@@ -44,6 +44,7 @@ function Timeline({edit, form}) {
                 title={title}
                 timeline={timeline}
                 duration={duration}
+                setTimeline={setTimeline}
             />
         }
     </>

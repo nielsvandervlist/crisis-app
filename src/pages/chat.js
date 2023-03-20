@@ -53,9 +53,6 @@ function Chat() {
                         <h3 className={'mb-4'}>Participants</h3>
                         {
                             participants.data.map((participant, index) => {
-
-
-
                                 return <Link href={`/rooms/${participant.id}`}>
                                     <a
                                         className={'chat__participant flex items-center'}
