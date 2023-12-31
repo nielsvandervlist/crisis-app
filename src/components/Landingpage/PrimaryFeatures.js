@@ -3,31 +3,36 @@ import Image from 'next/image'
 import { Tab } from '@headlessui/react'
 import Container from '@/components/Landingpage/Container'
 import clsx from 'clsx'
+import dashboard from '../../../public/images/dashboard.png'
+import chat from '../../../public/images/chat-dashboard.png'
+import dash from '../../../public/images/dash.png'
+import form from '../../../public/images/dashboard-form.png'
+import dashboard1 from '../../../public/images/dashboard-1.png'
 
 const features = [
 	{
-		title: 'Payroll',
+		title: 'Realtime timeline',
 		description:
-			"Keep track of everyone's salaries and whether or not they've been paid. Direct deposit not supported.",
-		image: ''
+			"Edit posts for your timeline and run the crisis based on an real event",
+		image: dashboard
 	},
 	{
-		title: 'Claim expenses',
+		title: 'Create your own crises',
 		description:
-			"All of your receipts organized into one place, as long as you don't mind typing in the data by hand.",
-		image: ''
+			"With a few click create your own use-cases.",
+		image: dashboard1
 	},
 	{
-		title: 'VAT handling',
+		title: 'Work together with co-workers or participants',
 		description:
-			"We only sell our software to companies who don't deal with VAT at all, so technically we do all the VAT stuff they need.",
-		image: ''
+			"Online chat, adding participants and admins",
+		image: chat
 	},
 	{
 		title: 'Reporting',
 		description:
 			'Easily export your data into an Excel spreadsheet where you can do whatever the hell you want with it.',
-		image: ''
+		image: dash
 	},
 ]
 
@@ -53,24 +58,15 @@ export function PrimaryFeatures() {
 		<section
 			id="features"
 			aria-label="Features for running your books"
-			className="relative overflow-hidden bg-blue-600 pt-20 pb-28 sm:py-32"
+			className="relative overflow-hidden bg-primary pt-20 pb-28 sm:py-32"
 		>
-			<Image
-				className="absolute top-1/2 left-1/2 max-w-none translate-x-[-44%] translate-y-[-42%]"
-				src={''}
-				alt=""
-				width={2245}
-				height={1636}
-				unoptimized
-			/>
 			<Container className="relative">
 				<div className="max-w-2xl md:mx-auto md:text-center xl:max-w-none">
 					<h2 className="font-display text-3xl tracking-tight text-white sm:text-4xl md:text-5xl">
-						Everything you need to run your books.
+                        The Hero Element of Crisis Management Training
 					</h2>
 					<p className="mt-6 text-lg tracking-tight text-blue-100">
-						Well everything you need if you aren’t that picky about minor details like tax
-						compliance.
+                        Step into a world where crisis becomes an opportunity for growth, where preparedness is the key to success. Crisissim is your partner in navigating the turbulent waters of uncertainty, ensuring that your organization not only survives but thrives in the face of adversity. Welcome to a new era of crisis management excellence—welcome to Crisissim.
 					</p>
 				</div>
 				<Tab.Group

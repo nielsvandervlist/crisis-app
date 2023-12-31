@@ -10,6 +10,7 @@ import Link from 'next/link'
 import { useAuth } from '@/hooks/auth'
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
+import Image from 'next/image'
 
 const Login = () => {
     const router = useRouter()
@@ -45,7 +46,7 @@ const Login = () => {
                 logo={
                     <Link href="/">
                         <a>
-                            <ApplicationLogo className="w-20 h-20 fill-current text-gray-500" />
+                            <Image src={'/images/logo.svg'} width={'220'} height={'125'}/>
                         </a>
                     </Link>
                 }>

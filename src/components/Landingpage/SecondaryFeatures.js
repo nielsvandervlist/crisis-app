@@ -40,8 +40,8 @@ const features = [
 		},
 	},
 	{
-		name: 'Inventory',
-		summary: 'Never lose track of what’s in stock with accurate inventory tracking.',
+		name: 'Social posts',
+		summary: 'Create your own custom posts',
 		description:
 			'We don’t offer this as part of our software but that statement is inarguably true. Accurate inventory tracking would help you for sure.',
 		image: '',
@@ -67,8 +67,8 @@ const features = [
 		},
 	},
 	{
-		name: 'Contacts',
-		summary: 'Organize all of your contacts, service providers, and invoices in one place.',
+		name: 'Online chat',
+		summary: 'Chat with your participants',
 		description:
 			'This also isn’t actually a feature, it’s just some friendly advice. We definitely recommend that you do this, you’ll feel really organized and professional.',
 		image: '',
@@ -93,7 +93,7 @@ const features = [
 function Feature({ feature, isActive, className, ...props }) {
 	return (
 		<div className={clsx(className, !isActive && 'opacity-75 hover:opacity-100')} {...props}>
-			<div className={clsx('w-9 rounded-lg', isActive ? 'bg-blue-600' : 'bg-slate-500')}>
+			<div className={clsx('w-9 rounded-lg', isActive ? 'bg-primary' : 'bg-slate-500')}>
 				<svg aria-hidden="true" className="h-9 w-9" fill="none">
 					<feature.icon />
 				</svg>
@@ -115,12 +115,6 @@ function FeaturesMobile() {
 			{features.map((feature) => (
 				<div key={feature.name}>
 					<Feature feature={feature} className="mx-auto max-w-2xl" isActive />
-					<div className="relative mt-10 pb-10">
-						<div className="absolute -inset-x-4 bottom-0 top-8 bg-slate-200 sm:-inset-x-6" />
-						<div className="relative mx-auto w-[52.75rem] overflow-hidden rounded-xl bg-white shadow-lg shadow-slate-900/5 ring-1 ring-slate-500/10">
-							<Image className="w-full" src={feature.image} alt="" sizes="52.75rem" />
-						</div>
-					</div>
 				</div>
 			))}
 		</div>
@@ -150,27 +144,6 @@ function FeaturesDesktop() {
 							/>
 						))}
 					</Tab.List>
-					<Tab.Panels className="rounded-4xl relative mt-20 overflow-hidden bg-slate-200 px-14 py-16 xl:px-16">
-						<div className="-mx-5 flex">
-							{features.map((feature, featureIndex) => (
-								<Tab.Panel
-									static
-									key={feature.name}
-									className={clsx(
-										'px-5 transition duration-500 ease-in-out [&:not(:focus-visible)]:focus:outline-none',
-										featureIndex !== selectedIndex && 'opacity-60'
-									)}
-									style={{ transform: `translateX(-${selectedIndex * 100}%)` }}
-									aria-hidden={featureIndex !== selectedIndex}
-								>
-									<div className="w-[52.75rem] overflow-hidden rounded-xl bg-white shadow-lg shadow-slate-900/5 ring-1 ring-slate-500/10">
-										<Image className="w-full" src={feature.image} alt="" sizes="52.75rem" />
-									</div>
-								</Tab.Panel>
-							))}
-						</div>
-						<div className="rounded-4xl pointer-events-none absolute inset-0 ring-1 ring-inset ring-slate-900/10" />
-					</Tab.Panels>
 				</>
 			)}
 		</Tab.Group>
@@ -187,7 +160,7 @@ export function SecondaryFeatures() {
 			<Container>
 				<div className="mx-auto max-w-2xl md:text-center">
 					<h2 className="font-display text-3xl tracking-tight text-slate-900 sm:text-4xl">
-						Simplify everyday business tasks.
+						Create your own use-cases
 					</h2>
 					<p className="mt-4 text-lg tracking-tight text-slate-700">
 						Because you’d probably be a little confused if we suggested you complicate your everyday

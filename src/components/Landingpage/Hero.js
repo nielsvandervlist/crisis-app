@@ -4,15 +4,12 @@ import Container from '@/components/Landingpage/Container'
 
 export function Hero() {
 	return (
-		<Container className="pt-20 pb-16 text-center lg:pt-32">
-			<h1 className="text-xxxl mx-auto max-w-4xl font-medium tracking-tight">
-				Managing your
-				<span className="text-primary-400 relative"> database </span>
-				made simple
+		<Container className="pt-16 pb-16 text-center max-w-2xl">
+			<h1 className="font-display text-3xl tracking-tight sm:text-4xl md:text-5xl">
+                Online crisis management
 			</h1>
-			<p className="text-md mx-auto mt-6 max-w-2xl font-light leading-loose tracking-tight text-slate-700">
-				Most bookkeeping software is accurate, but hard to use. We make the opposite trade-off, and
-				hope you don’t get audited.
+			<p className="mt-6 text-lg">
+                An online training platform meticulously crafted for handling crises within organizations, stands as a beacon of preparation in the midst of uncertainty.
 			</p>
 			<div className="mt-10 flex justify-center gap-x-6">
 				<Button
@@ -20,19 +17,6 @@ export function Hero() {
 					href={`${process.env.NEXT_PUBLIC_APP_URL}/register`}
 				>
 					Get 6 months free
-				</Button>
-				<Button
-					className={'flex items-center'}
-					href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
-					variant="secondary"
-				>
-					<svg
-						aria-hidden="true"
-						className="h-3 w-3 flex-none fill-blue-600 group-active:fill-current"
-					>
-						<path d="m9.997 6.91-7.583 3.447A1 1 0 0 1 1 9.447V2.553a1 1 0 0 1 1.414-.91L9.997 5.09c.782.355.782 1.465 0 1.82Z" />
-					</svg>
-					<span className="ml-3">Watch video</span>
 				</Button>
 			</div>
 		</Container>

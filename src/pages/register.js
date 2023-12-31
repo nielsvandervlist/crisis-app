@@ -8,6 +8,7 @@ import Label from '@/components/Label'
 import Link from 'next/link'
 import { useAuth } from '@/hooks/auth'
 import { useState } from 'react'
+import Image from 'next/image'
 
 const Register = () => {
     const { register } = useAuth({
@@ -33,7 +34,7 @@ const Register = () => {
                 logo={
                     <Link href="/">
                         <a>
-                            <ApplicationLogo className="w-20 h-20 fill-current text-gray-500" />
+                            <Image src={'/images/logo.svg'} width={'220'} height={'125'}/>
                         </a>
                     </Link>
                 }>

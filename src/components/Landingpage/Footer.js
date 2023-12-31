@@ -5,9 +5,6 @@ export default function Footer() {
 	return (
 		<footer className="bg-slate-50">
 			<Container>
-				<div className="py-16">
-                    Logo
-				</div>
 				<div className="flex flex-col items-center border-t border-slate-400/10 py-10 sm:flex-row-reverse sm:justify-between">
 					<div className="flex gap-x-6">
 						<Link href="https://twitter.com" className="group" aria-label="TaxPal on Twitter">
@@ -22,7 +19,7 @@ export default function Footer() {
 						</Link>
 					</div>
 					<p className="mt-6 text-sm text-slate-500 sm:mt-0">
-						Copyright &copy; {new Date().getFullYear()} TaxPal. All rights reserved.
+						Copyright &copy; {new Date().getFullYear()} Crisissim. All rights reserved.
 					</p>
 				</div>
 			</Container>
