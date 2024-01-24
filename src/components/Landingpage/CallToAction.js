@@ -6,7 +6,7 @@ import Container from '@/components/Landingpage/Container'
 function CallToAction({}) {
 	return (
 		<section id="get-started-today" className="relative overflow-hidden bg-primary py-32">
-			<Image
+			<Image alt={'john'}
 				className="absolute top-1/2 left-1/2 max-w-none -translate-x-1/2 -translate-y-1/2"
 				src={'/'}
 				alt=""

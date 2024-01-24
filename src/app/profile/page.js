@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import AppLayout from '@/components/Layouts/AppLayout'
-import {useAuth} from '@/hooks/auth'
+import useAuth from '@/hooks/auth'
 import Link from 'next/link'
 
 function Profile() {

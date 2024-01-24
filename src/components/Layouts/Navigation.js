@@ -1,5 +1,5 @@
-import { useAuth } from '@/hooks/auth'
-import { useRouter } from 'next/router'
+import useAuth from '@/hooks/auth'
+import { useRouter } from 'next/navigation'
 import {useState} from 'react'
 import Login from '@/components/Layouts/Navigation/Login'
 import Hamburger from '@/components/Layouts/Navigation/Hamburger'

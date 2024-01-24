@@ -1,9 +1,10 @@
+'use client'
 import useSWR from 'swr'
 import axios from '@/lib/axios'
 import { useEffect } from 'react'
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/navigation'
 
-export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
+export default function useAuth({ middleware, redirectIfAuthenticated } = {}){
     const router = useRouter()
 
     const { data: user, error, mutate } = useSWR('/api/user', () =>

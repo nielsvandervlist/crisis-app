@@ -1,5 +1,5 @@
 import {useEffect, useState} from 'react'
-import {useAuth} from '@/hooks/auth'
+import useAuth from '@/hooks/auth'
 import {Fetcher} from 'ra-fetch'
 
 function GetParticipants({company_id, alignRight, info, participant}) {

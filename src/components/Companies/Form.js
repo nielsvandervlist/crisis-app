@@ -1,6 +1,6 @@
 import {useEffect, useState} from 'react'
 import {Fetcher, useApi, useIndex} from 'ra-fetch'
-import {useAuth} from '@/hooks/auth'
+import useAuth from '@/hooks/auth'
 
 function Form({requestType, id, company}) {
 

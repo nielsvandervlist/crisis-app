@@ -1,4 +1,4 @@
-import {useAuth} from '@/hooks/auth'
+import useAuth from '@/hooks/auth'
 import {useEffect, useState} from 'react'
 import {Fetcher} from 'ra-fetch'
 import Link from 'next/link'

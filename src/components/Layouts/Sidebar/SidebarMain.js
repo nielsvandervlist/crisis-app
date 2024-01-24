@@ -1,54 +1,55 @@
 import Link from 'next/link'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import {useRouter} from 'next/router'
+import {useRouter, usePathname} from 'next/navigation'
 
 function SidebarMain({user}){
 
     const router = useRouter();
+    const pathname = usePathname()
 
     return <div className={'sidebar__main'}>
         <nav>
             {
                 (user?.roles[0].name === 'admin' || user?.roles[0].name === 'editor') &&
                 <ul>
-                    <li className={router.pathname.includes("/dashboard")  ? "active" : ""}>
+                    <li className={pathname.includes("/dashboard")  ? "active" : ""}>
                         <Link href={'/dashboard'}>
-                            <FontAwesomeIcon icon="circle-dot"/>Overview
+                            {/*<FontAwesomeIcon icon="circle-dot"/>Overview*/}
                         </Link>
                     </li>
-                    <li className={router.pathname.includes("/crises")  ? "active" : ""}>
+                    <li className={pathname.includes("/crises")  ? "active" : ""}>
                         <Link href={'/crises'}>
-                            <FontAwesomeIcon icon="fire"/>Crises
+                            {/*<FontAwesomeIcon icon="fire"/>Crises*/}
                         </Link>
                     </li>
-                    <li className={router.pathname.includes('/posts') ? "active" : ""}>
+                    <li className={pathname.includes('/posts') ? "active" : ""}>
                         <Link href={'/posts'}>
-                            <FontAwesomeIcon icon="envelope"/>Posts
+                            {/*<FontAwesomeIcon icon="envelope"/>Posts*/}
                         </Link>
                     </li>
-                    <li className={router.pathname.includes("/companies")  ? "active" : ""}>
+                    <li className={pathname.includes("/companies")  ? "active" : ""}>
                         <Link href={'/companies'}>
-                            <FontAwesomeIcon icon="building"/>Companies
+                            {/*<FontAwesomeIcon icon="building"/>Companies*/}
                         </Link>
                     </li>
-                    <li className={router.pathname.includes("/participants")  ? "active" : ""}>
+                    <li className={pathname.includes("/participants")  ? "active" : ""}>
                         <Link href={'/participants'}>
-                            <FontAwesomeIcon icon="user"/>Participants
+                            {/*<FontAwesomeIcon icon="user"/>Participants*/}
                         </Link>
                     </li>
-                    <li className={router.pathname.includes("/timelines")  ? "active" : ""}>
+                    <li className={pathname.includes("/timelines")  ? "active" : ""}>
                         <Link href={'/timelines'}>
-                            <FontAwesomeIcon icon="clock"/>Timelines
+                            {/*<FontAwesomeIcon icon="clock"/>Timelines*/}
                         </Link>
                     </li>
-                    <li className={router.pathname.includes("/rapports")  ? "active" : ""}>
+                    <li className={pathname.includes("/rapports")  ? "active" : ""}>
                         <Link href={'/rapports'}>
-                            <FontAwesomeIcon icon="clock"/>Reports
+                            {/*<FontAwesomeIcon icon="clock"/>Reports*/}
                         </Link>
                     </li>
-                    <li className={router.pathname.includes("/documents")  ? "active" : ""}>
+                    <li className={pathname.includes("/documents")  ? "active" : ""}>
                         <Link href={'/documents'}>
-                            <FontAwesomeIcon icon="file"/>Documents
+                            {/*<FontAwesomeIcon icon="file"/>Documents*/}
                         </Link>
                     </li>
                 </ul>
@@ -59,7 +60,7 @@ function SidebarMain({user}){
                     <ul>
                         <li>
                             <Link href={'/participant-dashboard'}>
-                                <FontAwesomeIcon icon="circle-dot"/>Overview
+                                {/*<FontAwesomeIcon icon="circle-dot"/>Overview*/}
                             </Link>
                         </li>
                     </ul>

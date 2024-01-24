@@ -1,5 +1,6 @@
+'use client'
 import Head from 'next/head'
-import { useAuth } from '@/hooks/auth'
+import useAuth from '@/hooks/auth'
 import LandingPage from '@/components/Landingpage/Landingpage'
 
 export default function Home() {

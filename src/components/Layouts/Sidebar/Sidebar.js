@@ -1,6 +1,6 @@
 import SidebarMain from '@/components/Layouts/Sidebar/SidebarMain'
 import SidebarExtra from '@/components/Layouts/Sidebar/SidebarExtra'
-import {useRouter} from 'next/router'
+import {useRouter} from 'next/navigation'
 
 function Sidebar({user}) {
 

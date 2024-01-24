@@ -1,6 +1,7 @@
+'use client'
 import AppLayout from '@/components/Layouts/AppLayout'
 import Head from 'next/head'
-import {useAuth} from '@/hooks/auth'
+import useAuth from '@/hooks/auth'
 import {Fetcher} from 'ra-fetch'
 import {useEffect, useState} from 'react'
 import Timeline from '@/components/Timeline/Timeline'
@@ -12,7 +13,22 @@ import PinterestLayout from '@/components/PostTypes/PinterestLayout'
 import Item from '@/components/PostTypes/Item'
 import Facebook from '@/components/PostTypes/Facebook'
 
-const Dashboard = () => {
+async function getData() {
+    const res = await fetch('https://httpbin.org/get')
+    // The return value is *not* serialized
+    // You can return Date, Map, Set, etc.
+
+    if (!res.ok) {
+        // This will activate the closest `error.js` Error Boundary
+        throw new Error('Failed to fetch data')
+    }
+
+    return res.json()
+}
+
+export default async function Dashboard(){
+
+    // const data = await getData()
 
     const {user} = useAuth({middleware: 'auth'})
     const [crises, setCrises] = useState()
@@ -20,6 +36,8 @@ const Dashboard = () => {
     const [activeCrisis, setActiveCrisis] = useState()
     const [timelinePosts, setTimelinePosts] = useState()
     const [open, setOpen] = useState(false)
+
+
 
     useEffect(() => {
         if (user?.id) {
@@ -101,5 +119,3 @@ const Dashboard = () => {
         </AppLayout>
     )
 }
-
-export default Dashboard

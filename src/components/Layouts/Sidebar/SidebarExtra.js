@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import Pusher from 'pusher-js'
-import {useAuth} from '@/hooks/auth'
+import useAuth from '@/hooks/auth'
 import {useEffect, useState} from 'react'
 import Echo from 'laravel-echo'
 import axios from '@/lib/axios'

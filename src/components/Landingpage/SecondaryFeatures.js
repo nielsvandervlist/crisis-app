@@ -1,5 +1,4 @@
-import { ReactNode, useId } from 'react'
-import Image from 'next/image'
+'use client'
 import { Tab } from '@headlessui/react'
 import Container from '@/components/Landingpage/Container'
 import clsx from 'clsx'

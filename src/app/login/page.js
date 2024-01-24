@@ -1,4 +1,4 @@
-import ApplicationLogo from '@/components/ApplicationLogo'
+'use client'
 import AuthCard from '@/components/AuthCard'
 import AuthSessionStatus from '@/components/AuthSessionStatus'
 import Button from '@/components/Button'
@@ -7,9 +7,10 @@ import Input from '@/components/Input'
 import InputError from '@/components/InputError'
 import Label from '@/components/Label'
 import Link from 'next/link'
-import {useAuth} from '@/hooks/auth'
+import useAuth from '@/hooks/auth'
 import {useEffect, useState} from 'react'
-import {useRouter} from 'next/router'
+import {useRouter} from 'next/navigation'
+import { useSearchParams } from 'next/navigation';
 import Image from 'next/image'
 
 const Login = () => {
@@ -25,9 +26,11 @@ const Login = () => {
     const [shouldRemember, setShouldRemember] = useState(false)
     const [errors, setErrors] = useState([])
     const [status, setStatus] = useState(null)
+    const searchParams = useSearchParams();
+    const reset = searchParams.get(reset)
 
     useEffect(() => {
-        if (router.query.reset?.length > 0 && errors.length === 0) {
+        if (reset.length > 0 && errors.length === 0) {
             setStatus(atob(router.query.reset))
         } else {
             setStatus(null)
@@ -46,7 +49,7 @@ const Login = () => {
                 logo={
                     <Link href="/">
 
-                        <Image src={'/images/logo.svg'} width={'220'} height={'125'}/>
+                        <Image alt={'john'} src={'/images/logo.svg'} width={'220'} height={'125'}/>
 
                     </Link>
                 }>

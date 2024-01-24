@@ -1,6 +1,6 @@
 import {Fetcher} from 'ra-fetch'
 import {useEffect, useState} from 'react'
-import {useAuth} from '@/hooks/auth'
+import useAuth from '@/hooks/auth'
 import DragAndDrop from '@/components/Forms/DragDrop'
 
 function FileDrop({documents, id}){

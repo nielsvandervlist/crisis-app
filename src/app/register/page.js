@@ -34,7 +34,7 @@ const Register = () => {
                 logo={
                     <Link href="/">
 
-                        <Image src={'/images/logo.svg'} width={'220'} height={'125'}/>
+                        <Image alt={'john'} src={'/images/logo.svg'} width={'220'} height={'125'}/>
 
                     </Link>
                 }>

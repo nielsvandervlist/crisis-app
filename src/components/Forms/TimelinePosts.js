@@ -1,6 +1,6 @@
 import {useEffect, useRef, useState} from 'react'
 import {Fetcher, useApi, useIndex} from 'ra-fetch'
-import {useAuth} from '@/hooks/auth'
+import useAuth from '@/hooks/auth'
 import Modal from '@/components/Modal/Modal'
 import TimelinePostForm from '@/components/Forms/TimelinePostForm'
 import Line from '@/components/Timeline/Line'

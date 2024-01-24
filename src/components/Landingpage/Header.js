@@ -11,7 +11,7 @@ export function Header() {
 				<nav className="relative z-50 flex justify-between">
 					<div className="flex items-center md:gap-x-12">
 						<Link href="#" aria-label="Home">
-							<Image src={'/images/logo.svg'} width={'220'} height={'125'}/>
+							<Image alt={'john'} src={'/images/logo.svg'} width={'220'} height={'125'}/>
 						</Link>
 					</div>
 					<div className="flex items-center gap-x-5 md:gap-x-8">

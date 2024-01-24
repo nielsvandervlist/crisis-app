@@ -3,7 +3,7 @@ import Head from 'next/head'
 import MultipleFileUpload from '@/components/Forms/MultipleFileUpload'
 import {Fetcher} from 'ra-fetch'
 import {useState} from 'react'
-import {useAuth} from '@/hooks/auth'
+import useAuth from '@/hooks/auth'
 
 const Create = () => {
 

@@ -1,6 +1,6 @@
 import GetParticipants from '@/components/Participants/GetParticipants'
 import {useEffect} from 'react'
-import {useAuth} from '@/hooks/auth'
+import useAuth from '@/hooks/auth'
 import {Fetcher} from 'ra-fetch'
 
 function TimelinePostsFooter({company_id, timeline, setTimeline}) {

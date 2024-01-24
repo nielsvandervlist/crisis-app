@@ -1,8 +1,8 @@
 import {useEffect, useState} from 'react'
-import {useAuth} from '@/hooks/auth'
+import useAuth from '@/hooks/auth'
 import TimelineForm from '@/components/Forms/TimelineForm'
 import TimelinePosts from '@/components/Forms/TimelinePosts'
-import {useRouter} from 'next/router'
+import {useRouter} from 'next/navigation'
 
 function Timeline({edit, form}) {
 

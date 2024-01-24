@@ -1,3 +1,4 @@
+'use client'
 import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import { Tab } from '@headlessui/react'
@@ -125,10 +126,9 @@ export function PrimaryFeatures() {
 											</p>
 										</div>
 										<div className="mt-10 w-[45rem] overflow-hidden rounded-xl bg-slate-50 shadow-xl shadow-blue-900/20 sm:w-auto lg:mt-0 lg:w-[67.8125rem]">
-											<Image
+											<Image alt={'john'}
 												className="w-full"
 												src={feature.image}
-												alt=""
 												priority
 												sizes="(min-width: 1024px) 67.8125rem, (min-width: 640px) 100vw, 45rem"
 											/>

@@ -59,7 +59,7 @@ export default function Faqs() {
 			aria-labelledby="faq-title"
 			className="relative overflow-hidden bg-slate-50 py-20 sm:py-32"
 		>
-			<Image
+			<Image alt={'john'}
 				className="absolute top-0 left-1/2 max-w-none translate-x-[-30%] -translate-y-1/4"
 				src={'/'}
 				alt=""

@@ -1,6 +1,6 @@
 import AppLayout from '@/components/Layouts/AppLayout'
 import Head from 'next/head'
-import {useAuth} from '@/hooks/auth'
+import useAuth from '@/hooks/auth'
 import List from '@/components/Lists/List'
 import {useEffect, useState} from 'react'
 import {Fetcher} from 'ra-fetch'
