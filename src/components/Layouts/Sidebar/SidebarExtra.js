@@ -72,7 +72,7 @@ function SidebarExtra() {
             <ul>
                 <li>
                     <Link href={'/notifications'}>
-                        <a>
+
                             Notifications
                             {
                                 notifications &&
@@ -80,15 +80,15 @@ function SidebarExtra() {
                                     <span>{notifications.length}</span>
                                 </span>
                             }
-                        </a>
+
                     </Link>
                 </li>
                 <li>
                     <Link href={'/chat'}>
-                        <a>
+
                             {/*<FontAwesomeIcon icon="comment"/>*/}
                             Chat
-                        </a>
+
                     </Link>
                 </li>
             </ul>

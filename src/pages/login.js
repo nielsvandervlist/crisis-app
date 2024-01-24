@@ -7,15 +7,15 @@ import Input from '@/components/Input'
 import InputError from '@/components/InputError'
 import Label from '@/components/Label'
 import Link from 'next/link'
-import { useAuth } from '@/hooks/auth'
-import { useEffect, useState } from 'react'
-import { useRouter } from 'next/router'
+import {useAuth} from '@/hooks/auth'
+import {useEffect, useState} from 'react'
+import {useRouter} from 'next/router'
 import Image from 'next/image'
 
 const Login = () => {
     const router = useRouter()
 
-    const { login } = useAuth({
+    const {login} = useAuth({
         middleware: 'guest',
         redirectIfAuthenticated: '/dashboard',
     })
@@ -37,7 +37,7 @@ const Login = () => {
     const submitForm = async event => {
         event.preventDefault()
 
-        login({ email, password, remember: shouldRemember, setErrors, setStatus })
+        login({email, password, remember: shouldRemember, setErrors, setStatus})
     }
 
     return (
@@ -45,14 +45,14 @@ const Login = () => {
             <AuthCard
                 logo={
                     <Link href="/">
-                        <a>
+
                             <Image src={'/images/logo.svg'} width={'220'} height={'125'}/>
-                        </a>
+
                     </Link>
                 }>
 
                 {/* Session Status */}
-                <AuthSessionStatus className="mb-4" status={status} />
+                <AuthSessionStatus className="mb-4" status={status}/>
 
                 <form onSubmit={submitForm}>
                     {/* Email Address */}
@@ -69,7 +69,7 @@ const Login = () => {
                             autoFocus
                         />
 
-                        <InputError messages={errors.email} className="mt-2" />
+                        <InputError messages={errors.email} className="mt-2"/>
                     </div>
 
                     {/* Password */}
@@ -86,7 +86,7 @@ const Login = () => {
                             autoComplete="current-password"
                         />
 
-                        <InputError messages={errors.password} className="mt-2" />
+                        <InputError messages={errors.password} className="mt-2"/>
                     </div>
 
                     {/* Remember Me */}
@@ -109,10 +109,10 @@ const Login = () => {
                     </div>
 
                     <div className="flex items-center justify-end mt-4">
-                        <Link href="/forgot-password">
-                            <a className="underline text-sm text-gray-600 hover:text-gray-900">
-                                Forgot your password?
-                            </a>
+                        <Link href="/forgot-password" className="underline text-sm text-gray-600 hover:text-gray-900">
+
+                            Forgot your password?
+
                         </Link>
 
                         <Button className="ml-3">Login</Button>

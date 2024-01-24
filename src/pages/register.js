@@ -33,9 +33,9 @@ const Register = () => {
             <AuthCard
                 logo={
                     <Link href="/">
-                        <a>
+
                             <Image src={'/images/logo.svg'} width={'220'} height={'125'}/>
-                        </a>
+
                     </Link>
                 }>
 
@@ -111,10 +111,8 @@ const Register = () => {
                     </div>
 
                     <div className="flex items-center justify-end mt-4">
-                        <Link href="/login">
-                            <a className="underline text-sm text-gray-600 hover:text-gray-900">
+                        <Link className="underline text-sm text-gray-600 hover:text-gray-900" href="/login">
                                 Already registered?
-                            </a>
                         </Link>
 
                         <Button className="ml-4">Register</Button>

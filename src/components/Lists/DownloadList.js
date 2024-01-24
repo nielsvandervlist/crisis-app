@@ -72,11 +72,8 @@ export default function DownloadList({items, setItems, type}) {
                                         <FontAwesomeIcon icon="fa-solid fa-download" />
                                     </span>
                                 </a>
-                                <Link href={`/${type}/${item.id}`}>
-                                    <a
-                                        className={'btn btn--primary btn--label btn--icon mr-4'}>
+                                <Link href={`/${type}/${item.id}`} className={'btn btn--primary btn--label btn--icon mr-4'}>
                                         <FontAwesomeIcon icon="pen-to-square"/>
-                                    </a>
                                 </Link>
                                 <div
                                     onClick={() => submitDelete(item.id)}

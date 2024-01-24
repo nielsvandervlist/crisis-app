@@ -23,8 +23,8 @@ function Profile() {
                 <div className={'col-span-8'}>
                     <h2>{user?.name}</h2>
                     <h3>{user?.email}</h3>
-                    <Link href={`/password-reset/${user?.id}`}>
-                        <a className={'btn btn--primary inline-block mt-8'}>Reset password</a>
+                    <Link className={'btn btn--primary inline-block mt-8'} href={`/password-reset/${user?.id}`}>
+                        Reset password
                     </Link>
                 </div>
             </div>

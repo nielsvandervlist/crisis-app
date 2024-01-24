@@ -33,7 +33,7 @@ const Timelines = () => {
             </Head>
 
             <div className={'flex w-full col-span-12 mb-2'}>
-                <button className={'btn btn--primary'}><Link href={`timelines/create`}><a>Create timeline</a></Link></button>
+                <button className={'btn btn--primary'}><Link href={`timelines/create`}>Create timeline</Link></button>
             </div>
 
             {timelines && <List items={timelines} setItems={setTimelines} type={'timelines'}/>}

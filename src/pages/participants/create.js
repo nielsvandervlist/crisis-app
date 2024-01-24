@@ -21,7 +21,7 @@ function Create(){
             <div className={'card col-span-6'}>
                 <h3 className={'mb-4'}>Creating a new participant</h3>
                 <p className={'mb-4'}>Participants can join a online crises that you setup. Make sure that you have a <Link href={'/create/company'}><a
-                    className={'underline'}>company</a></Link> created before creating a participant</p>
+                    className={'underline'}>company</Link> created before creating a participant</p>
                 <p>The participant receives an <b>email</b> with the login information once created!</p>
             </div>
 

@@ -60,8 +60,7 @@ function RapportForm({requestType, id, rapport}) {
 
         <h3 className={'mb-4'}>Creating a new rapport</h3>
         <p className={'mb-4'}>Rapports can be created once a crisis is finished</p>
-        <p className={'mb-8'}>Create a <Link href={'/create/crisis'}><a
-            className={'underline'}>crisis</a></Link> before you create a rapport</p>
+        <p className={'mb-8'}>Create a <Link className={'underline'} href={'/create/crisis'}>crisis</Link> before you create a rapport</p>
 
         <fieldset>
             <div className={'form__block'}>

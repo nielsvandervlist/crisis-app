@@ -33,7 +33,7 @@ const Rapports = () => {
             </Head>
 
             <div className={'flex w-full col-span-12 mb-2'}>
-                <button className={'btn btn--primary'}><Link href={`rapports/create`}><a>Create rapport</a></Link></button>
+                <button className={'btn btn--primary'}><Link href={`rapports/create`}>Create rapport</Link></button>
             </div>
 
             {rapports && <List items={rapports} setItems={setRapports} type={'rapports'}/>}

@@ -13,42 +13,42 @@ function SidebarMain({user}){
                 <ul>
                     <li className={router.pathname.includes("/dashboard")  ? "active" : ""}>
                         <Link href={'/dashboard'}>
-                            <a><FontAwesomeIcon icon="circle-dot"/>Overview</a>
+                            <FontAwesomeIcon icon="circle-dot"/>Overview
                         </Link>
                     </li>
                     <li className={router.pathname.includes("/crises")  ? "active" : ""}>
                         <Link href={'/crises'}>
-                            <a><FontAwesomeIcon icon="fire"/>Crises</a>
+                            <FontAwesomeIcon icon="fire"/>Crises
                         </Link>
                     </li>
                     <li className={router.pathname.includes('/posts') ? "active" : ""}>
                         <Link href={'/posts'}>
-                            <a><FontAwesomeIcon icon="envelope"/>Posts</a>
+                            <FontAwesomeIcon icon="envelope"/>Posts
                         </Link>
                     </li>
                     <li className={router.pathname.includes("/companies")  ? "active" : ""}>
                         <Link href={'/companies'}>
-                            <a><FontAwesomeIcon icon="building"/>Companies</a>
+                            <FontAwesomeIcon icon="building"/>Companies
                         </Link>
                     </li>
                     <li className={router.pathname.includes("/participants")  ? "active" : ""}>
                         <Link href={'/participants'}>
-                            <a><FontAwesomeIcon icon="user"/>Participants</a>
+                            <FontAwesomeIcon icon="user"/>Participants
                         </Link>
                     </li>
                     <li className={router.pathname.includes("/timelines")  ? "active" : ""}>
                         <Link href={'/timelines'}>
-                            <a><FontAwesomeIcon icon="clock"/>Timelines</a>
+                            <FontAwesomeIcon icon="clock"/>Timelines
                         </Link>
                     </li>
                     <li className={router.pathname.includes("/rapports")  ? "active" : ""}>
                         <Link href={'/rapports'}>
-                            <a><FontAwesomeIcon icon="clock"/>Reports</a>
+                            <FontAwesomeIcon icon="clock"/>Reports
                         </Link>
                     </li>
                     <li className={router.pathname.includes("/documents")  ? "active" : ""}>
                         <Link href={'/documents'}>
-                            <a><FontAwesomeIcon icon="file"/>Documents</a>
+                            <FontAwesomeIcon icon="file"/>Documents
                         </Link>
                     </li>
                 </ul>
@@ -59,7 +59,7 @@ function SidebarMain({user}){
                     <ul>
                         <li>
                             <Link href={'/participant-dashboard'}>
-                                <a><FontAwesomeIcon icon="circle-dot"/>Overview</a>
+                                <FontAwesomeIcon icon="circle-dot"/>Overview
                             </Link>
                         </li>
                     </ul>

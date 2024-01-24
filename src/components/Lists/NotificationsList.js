@@ -36,8 +36,7 @@ function NotificationsList({notifications, user}) {
                             <span>{helpers.uploadTime(notification.created_at)}</span>
                         </td>
                         <td className={'mt-auto'}>{notification.description}</td>
-                        <td className={'mt-auto mb-auto'}><Link href={'/'}><a
-                            className={'btn btn--label'}>{notification.src}</a></Link></td>
+                        <td className={'mt-auto mb-auto'}><Link className={'btn btn--label'} href={'/'}>{notification.src}</Link></td>
                     </tr>
                 })
             }

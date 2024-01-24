@@ -14,11 +14,11 @@ function Popup({message, setMessage}) {
     return <div className={`popup ${message ? 'popup--show' : ''}`}>
         <div className={'popup__header'}>
             <h2>{message ? message.title : ''}</h2>
-            <span className={'ml-auto cursor-pointer'} onClick={() => setMessage(false)}><FontAwesomeIcon icon={'circle-xmark'}/></span>
+            <span className={'ml-auto cursor-pointer'} onClick={() => setMessage(false)}></span>
         </div>
         <div className={'popup__body'}>
             <p className={'mb-4'}>{message ? message.description : ''}</p>
-            <Link href={'/dashboard'}><a className={'btn btn--primary'}>Link to notification</a></Link>
+            <Link className={'btn btn--primary'} href={'/dashboard'}>Link to notification</Link>
         </div>
     </div>
 }

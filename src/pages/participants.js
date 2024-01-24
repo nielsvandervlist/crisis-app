@@ -36,7 +36,7 @@ const Participants = () => {
             <div className={'card col-span-4 flex flex-col'}>
                 <h3 className={'mb-4'}>Ont this page you can view your participants</h3>
                 <p className={'mb-8'}>Or you can create a new one! Also you can edit or delete your participants easily from here.</p>
-                <button className={'btn btn--primary'}><Link href={`participants/create`}><a>Create participant</a></Link></button>
+                <button className={'btn btn--primary'}><Link href={`participants/create`}>Create participant</Link></button>
             </div>
 
             {participants && <List items={participants} setItems={setParticipants} type={'participants'}/>}

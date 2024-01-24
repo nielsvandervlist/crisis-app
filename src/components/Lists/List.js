@@ -67,10 +67,10 @@ export default function List({items, setItems, type}) {
                         <td className={'p-6 cursor-pointer flex'}>
                             <div className={'flex ml-auto'}>
                                 <Link href={`/${type}/${item.id}`}>
-                                    <a
+
                                         className={'btn btn--primary btn--label btn--icon mr-4'}>
                                         <FontAwesomeIcon icon="pen-to-square"/>
-                                    </a>
+
                                 </Link>
                                 <div
                                     onClick={() => submitDelete(item.id)}

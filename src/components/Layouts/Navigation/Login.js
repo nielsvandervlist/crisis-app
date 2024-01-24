@@ -28,7 +28,7 @@ function Login({user, logout}){
             }>
 
             {/* Authentication */}
-            <DropdownButton><Link href={'/profile'}><a>Profile</a></Link></DropdownButton>
+            <DropdownButton><Link href={'/profile'}>Profile</Link></DropdownButton>
             <DropdownButton onClick={logout}>
                 Logout
             </DropdownButton>

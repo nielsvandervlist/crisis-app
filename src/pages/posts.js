@@ -34,7 +34,7 @@ const Posts = () => {
             </Head>
 
             <div className={'flex w-full col-span-12 mb-2'}>
-                <button className={'btn btn--primary'}><Link href={`posts/create`}><a>Create post</a></Link></button>
+                <button className={'btn btn--primary'}><Link href={`posts/create`}>Create post</Link></button>
             </div>
 
             {posts && <List items={posts} setItems={setPosts} type={'posts'}/>}

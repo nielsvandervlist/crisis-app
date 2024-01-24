@@ -33,7 +33,7 @@ const Companies = () => {
             </Head>
 
             <div className={'flex w-full col-span-12 mb-2'}>
-                <button className={'btn btn--primary'}><Link href={`companies/create`}><a>Create company</a></Link></button>
+                <button className={'btn btn--primary'}><Link href={`companies/create`}>Create company</Link></button>
             </div>
 
             {companies && <List items={companies} setItems={setCompanies} type={'companies'}/>}

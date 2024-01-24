@@ -21,9 +21,9 @@ function Create() {
             <div className={'col-span-6 card'}>
                 <h3 className={'mb-4'}>Creating a new post</h3>
                 <p className={'mb-4'}>Posts can be placed on a timeline or can be injected into a online crisis.
-                    Make sure that you have a <Link href={'/create/crises'}><a
-                        className={'underline'}>crisis</a></Link> and <Link href={'/create/timelines'}><a
-                        className={'underline'}>timeline</a></Link> created before using the posts</p>
+                    Make sure that you have a <Link href={'/create/crises'}>
+                        className={'underline'}>crisis</Link> and <Link href={'/create/timelines'}>
+                        className={'underline'}>timeline</Link> created before using the posts</p>
                 <p>You can already make posts beforehand so you can use them later!</p>
             </div>
 

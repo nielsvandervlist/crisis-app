@@ -107,8 +107,7 @@ function PostForm({requestType, id, post}) {
                 id &&
                 <div className={'form__block'}>
                     <label>Once set online the post appears on the overview page. The post can be seen by the
-                        participants. Make sure the <Link href={'/crises'}><a
-                            className={'underline'}> crisis</a></Link> is running as well</label>
+                        participants. Make sure the <Link className={'underline'} href={'/crises'}>crisis</Link> is running as well</label>
                     <input
                         type={'checkbox'}
                         value={online}
